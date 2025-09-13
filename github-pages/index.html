@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidade Tática - Projeto Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1200x800/2d3748/cccccc?text=Background'); background-size: cover; background-position: center; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-lg shadow-sm z-50">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="text-2xl font-bold text-slate-900">Unidade Tática</a>
+                <ul class="hidden md:flex items-center space-x-8 font-semibold text-slate-700">
+                    <li><a href="cenario.html" class="hover:text-blue-600 transition-colors">O Cenário</a></li>
+                    <li><a href="solucao.html" class="hover:text-blue-600 transition-colors">A Solução</a></li>
+                    <li><a href="equipe.html" class="hover:text-blue-600 transition-colors">A Equipe</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg text-white">
+        <div class="max-w-5xl mx-auto px-6 py-32 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">Comércio de Artigos Táticos</h1>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-slate-200">Levando a Unidade Tática para o ambiente digital com uma plataforma de e-commerce robusta, segura e com gestão de estoque integrada.</p>
+            <a href="solucao.html" class="mt-10 inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform hover:scale-105">Conheça a Solução</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Visão Geral do Projeto</h2>
+            <p class="mt-4 text-lg text-slate-600">O projeto visa resolver desafios críticos de negócio e criar novas oportunidades através da tecnologia.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-2">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-5">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">O Cenário</h3>
+                <p class="text-slate-600 mb-5">A ausência de um canal digital e a gestão manual de estoque limitam o crescimento e geram falhas operacionais.</p>
+                <a href="cenario.html" class="font-bold text-blue-600 hover:text-blue-800">Ver detalhes &rarr;</a>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-2">
+                 <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-5">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">A Solução</h3>
+                <p class="text-slate-600 mb-5">Uma plataforma de e-commerce com estoque integrado em tempo real, responsiva e focada na segurança e experiência do usuário. </p>
+                <a href="solucao.html" class="font-bold text-blue-600 hover:text-blue-800">Ver detalhes &rarr;</a>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-2">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-5">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">A Equipe</h3>
+                <p class="text-slate-600 mb-5">Desenvolvido com o processo RAD (Rapid Application Development) para garantir entregas rápidas, validação contínua e flexibilidade.</p>
+                <a href="equipe.html" class="font-bold text-blue-600 hover:text-blue-800">Ver detalhes &rarr;</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300">
+        <div class="max-w-5xl mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Unidade Tática - Projeto de E-commerce. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
