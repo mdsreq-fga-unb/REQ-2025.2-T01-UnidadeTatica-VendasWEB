@@ -1,90 +1,443 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Cenário - Projeto Unidade Tática</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visão do Produto e Projeto - Unidade Tática</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <nav class="sticky top-0 bg-white/90 backdrop-blur-lg shadow-sm z-50">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="flex items-center justify-between h-20">
-                <a href="index.html" class="text-2xl font-bold text-slate-900">Unidade Tática</a>
-                <ul class="hidden md:flex items-center space-x-8 font-semibold text-slate-700">
-                    <li><a href="cenario.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">O Cenário</a></li>
-                    <li><a href="solucao.html" class="hover:text-blue-600 transition-colors">A Solução</a></li>
-                    <li><a href="equipe.html" class="hover:text-blue-600 transition-colors">A Equipe</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <!-- top nav -->
+  <nav class="sticky top-0 bg-white/90 backdrop-blur-lg shadow-sm z-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="text-2xl font-bold text-slate-900">Unidade Tática</a>
+        <ul class="hidden md:flex items-center space-x-8 font-semibold text-slate-700">
+          <li><a href="visao-produto.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Visão do Produto e Projeto</a></li>
+          <li><a href="solucao.html" class="hover:text-blue-600 transition-colors">Apresentações</a></li>
+          <li><a href="equipe.html" class="hover:text-blue-600 transition-colors">Equipe</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <main class="max-w-5xl mx-auto px-6 py-20">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Cenário Atual e Oportunidades</h1>
-            <p class="mt-4 text-lg text-slate-600">Entendendo o ponto de partida e os desafios do negócio.</p>
+  <!-- layout: sidebar + conteúdo -->
+  <main class="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
+
+    <!-- sidebar (oculta em mobile) -->
+    <aside
+  class="hidden md:block sticky top-20 h-[calc(100vh-5rem)] overflow-auto pr-4"
+>
+  <nav>
+    <ul class="space-y-4 font-medium text-slate-700">
+      <li><a href="#contexto" class="block hover:text-blue-600">1. CENÁRIO</a></li>
+      <li><a href="#desafios" class="block hover:text-blue-600">2. SOLUÇÃO</a></li>
+      <li><a href="#estrategias" class="block hover:text-blue-600">3. ESTRATÉGIAS</a></li>
+      <li><a href="#cronograma" class="block hover:text-blue-600">4. CRONOGRAMA</a></li>
+      <li><a href="#interacao" class="block hover:text-blue-600">5. INTERAÇÃO</a></li>
+      <li><a href="#licoes" class="block hover:text-blue-600">6. LIÇÕES</a></li>
+      <li><a href="#referencias" class="block hover:text-blue-600">7. REFERÊNCIAS</a></li>
+    </ul>
+  </nav>
+</aside>
+
+
+    <!-- conteúdo principal -->
+    <section class="md:col-span-3 space-y-12">
+
+      <!-- introdução -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Visão do Produto e Projeto</h1>
         </div>
 
-        <div class="space-y-12">
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Contexto e Oportunidade</h2>
-                <p class="text-slate-600 leading-relaxed">
-                    A Unidade Tática é uma loja especializada em artigos militares e de infantaria, com uma clientela fiel no ponto físico. No entanto, a ausência de um canal digital estruturado e a gestão manual do estoque restringem seu alcance, diminuem a competitividade e podem comprometer a experiência do cliente. A oportunidade central é modernizar os processos através de uma plataforma de e-commerce segura e integrada, capaz de sustentar o crescimento do negócio no ambiente digital. 
-                </p>
-            </div>
-            
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Principais Desafios</h2>
-                <ul class="space-y-3 text-slate-600">
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <span><strong>Integração de Estoque:</strong> O maior desafio técnico é desenvolver uma plataforma que integre o estoque físico com o online em tempo real, eliminando falhas de sincronização e a venda de produtos indisponíveis.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        <span><strong>Segurança e Logística:</strong> Estruturar um processo de vendas online seguro e uma logística de entrega eficiente, superando a falta de um sistema integrado existente.</span>
-                    </li>
-                     <li class="flex items-start">
-                        <svg class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.122 2.122"></path></svg>
-                        <span><strong>Adaptação e Mão de Obra:</strong> Lidar com a pouca experiência da equipe com novas tecnologias, exigindo treinamentos e uma adaptação dos processos internos para a nova realidade digital.</span>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Segmentação de Clientes</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-slate-100 p-4 rounded-lg">
-                        <h4 class="font-bold text-slate-900">Profissionais de Segurança</h4>
-                        <p class="text-sm text-slate-600 mt-1">Policiais, civis e bombeiros que buscam uniformes, equipamentos de proteção e acessórios táticos de alta confiabilidade.</p>
-                    </div>
-                    <div class="bg-slate-100 p-4 rounded-lg">
-                        <h4 class="font-bold text-slate-900">Militares</h4>
-                        <p class="text-sm text-slate-600 mt-1">Soldados e oficiais das Forças Armadas que procuram equipamentos padronizados para uso em treinamentos e missões.</p>
-                    </div>
-                    <div class="bg-slate-100 p-4 rounded-lg">
-                        <h4 class="font-bold text-slate-900">Entusiastas</h4>
-                        <p class="text-sm text-slate-600 mt-1">Pescadores, caçadores, aventureiros e colecionadores que necessitam de itens resistentes para esportes, lazer e uso casual.</p>
-                    </div>
-                </div>
-            </div>
+      <!-- Seção 1 -->
+      <div id="contexto" class="bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">1. CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO</h2>
+        <h3 class="text-2xl font-bold mb-4">1.1 Introdução ao Negócio e Contexto</h3>
+        <p class="text-slate-600 leading-relaxed">
+          A Unidade Tática é uma loja especializada em artigos militares e de infantaria, focada em dois públicos-alvo principais: militares e entusiastas da área tática. Para os militares, a loja oferece equipamentos de alta qualidade e durabilidade, como uniformes, coletes e acessórios de combate. Já para os entusiastas, a loja dispõe de uma variedade de vestuário tático para uso casual, equipamentos de aventura e itens para a prática de airsoft, unindo estilo e funcionalidade. A força da marca está na curadoria de produtos, na oferta de um atendimento especializado e na construção de uma comunidade que valoriza o estilo de vida e os valores da área tática, indo além da simples venda de produtos.
+        </p>
+        <h3 class="text-2xl font-bold mb-4">1.2 Identificação da Oportunidade ou Problema</h3>
+        <p class="text-slate-600 leading-relaxed">
+          A Unidade Tática enfrenta atualmente grandes desafios na expansão de suas operações para o ambiente digital. Apesar de possuir uma clientela fiel no ponto físico, a loja apresenta uma forte deficiência em vendas online e no gerenciamento de estoque. Essa limitação restringe o alcance da loja, reduz a competitividade e compromete a experiência de compra dos clientes.
+	Entre as dificuldades recorrentes, destacam-se a ausência de um canal digital estruturado para vendas, a falta de integração entre estoque físico e virtual e a baixa rotatividade de produtos, que frequentemente resulta em indisponibilidade de itens anunciados.
+	Esse cenário demonstra a necessidade urgente de modernizar os processos de vendas e de gestão de estoque, aproveitando a oportunidade de criar um canal online seguro, integrado e capaz de sustentar o crescimento do negócio.
+        <h3 class="text-2xl font-bold mb-4">1.3 Desafios do Projeto</h3>
+        <p class="text-slate-600 leading-relaxed">
+          O principal obstáculo do projeto é pensar numa forma segura para vendas online e logística de entrega e ajuda no gerenciamento de estoque em baixa escala.
+	A transição da Unidade Tática para o ambiente digital envolve desafios que vão muito além da criação de um site de vendas. O primeiro deles é de natureza técnica: será necessário desenvolver uma plataforma que integre em tempo real o estoque físico com em uma plataforma online. Hoje, esse processo é manual e sujeito a falhas, o que pode resultar em indisponibilidade de produtos, cancelamentos de pedidos e perda de credibilidade junto aos clientes. Garantir essa integração sem comprometer a performance do sistema é um passo essencial.
+	Diante desse cenário, torna-se fundamental estabelecer prioridades claras, direcionando os esforços iniciais para funcionalidades que gerem maior valor imediato para o cliente — como segurança nas transações, simplicidade no processo de compra e eficiência na gestão de estoque.
+        <h3 class="text-2xl font-bold mb-4">1.4 Segmentação de Clientes</h3>
+        <p class="text-slate-600 leading-relaxed">
+          A Unidade Tática atende aos seguintes segmentos de clientes:
+Profissionais da Segurança Pública: Policiais militares, civis e bombeiros que buscam uniformes, equipamentos de proteção e acessórios táticos de alta confiabilidade. Valorizam durabilidade, funcionalidade e custo-benefício.
+Militares das Forças Armadas: Soldados e oficiais do Exército que procuram equipamentos padronizados e acessórios complementares para uso em treinamentos e missões, geralmente em maior volume.
+Praticantes de Atividades ao Ar Livre: Pescadores, caçadores e aventureiros que necessitam de itens resistentes e multifuncionais para esportes e lazer em ambientes naturais.
+Segmentação de Clientes da Unidade Tática: A Unidade Tática atende a entusiastas e colecionadores, um público com faixa etária entre 18 e 40 anos, que está altamente conectado a tecnologias. Eles utilizam redes sociais e plataformas como o YouTube para pesquisar produtos, e a compra online é uma prática comum para eles.
 
-        </div>
-    </main>
-    
-    <footer class="bg-slate-800 text-slate-300 mt-20">
-        <div class="max-w-5xl mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 Unidade Tática - Projeto de E-commerce. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+        </p>
+      </div>
 
+      <!-- Seção 2 -->
+      <div id="desafios" class="bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">2. SOLUÇÃO PROPOSTA</h2>
+        <h3 class="text-2xl font-bold mb-4">2.1 Objetivo do Produto</h3>
+        <p class="text-slate-600 leading-relaxed">
+          O objetivo do produto é implementar uma plataforma de e-commerce que permita à Unidade Tática expandir sua presença no mercado digital, oferecendo aos clientes uma experiência de compra prática e segura, enquanto possibilita ao administrador maior eficiência no controle de estoque, acompanhamento das vendas e gestão dos processos de entrega.
+        </p>
+        <h3 class="text-2xl font-bold mb-4">2.2 Características da Solução</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Aqui, tem-se um conjunto inicial das principais características que a solução deverá ter:
+O sistema de e-commerce será sincronizado em tempo real com o estoque da loja, garantindo que os clientes visualizem apenas produtos disponíveis.
+
+
+O administrador terá acesso a um módulo de gerenciamento de produtos, permitindo cadastrar, editar e excluir itens, além de acompanhar a movimentação do estoque em tempo real.
+
+
+O site será responsivo, garantindo que a navegação e o processo de compra sejam fluidos e consistentes em diferentes dispositivos, como computadores, tablets e smartphones.
+
+
+A área administrativa disponibilizará relatórios detalhados de vendas e movimentação de estoque, apoiando a tomada de decisões estratégicas.
+
+
+A plataforma permitirá múltiplas opções de entrega, oferecendo ao cliente a possibilidade de retirada em loja ou envio por transportadora.
+
+
+O sistema será desenvolvido com foco em segurança, implementando autenticação de usuários, criptografia de dados e conformidade com a LGPD, reforçando a confiança dos clientes.
+<h3 class="text-2xl font-bold mb-4">2.4 Pesquisa de Mercado e Análise Competitiva</h3>
+        <p class="text-slate-600 leading-relaxed">
+          No mercado de artigos táticos, as principais concorrentes da Unidade Tática já possuem operações de e-commerce, como a Comando Tático e a Zona Militar Brasil. No entanto, ambas apresentam fragilidades:
+Comando Tático: Embora tenha uma forte presença online, não possui integração em tempo real com o estoque, resultando em eventuais vendas de itens indisponíveis e frustração para o cliente. Seu site também não é otimizado para a experiência mobile.
+Zona Militar Brasil: A experiência de compra é prejudicada por um processo de checkout longo e complexo. Além disso, não oferece a opção de retirada em loja, uma conveniência valorizada por clientes locais.
+A solução da Unidade Tática irá se diferenciar por:
+Integração em Tempo Real com o Estoque: O estoque físico e online será totalmente sincronizado, eliminando vendas de itens fora de estoque e aumentando a confiança do cliente.
+Checkout Simplificado: O processo de compra será otimizado para ser concluído em poucas etapas, com opções de pagamento convenientes.
+Flexibilidade na Entrega: A opção de retirada em loja será um diferencial competitivo chave para atender ao público local e reduzir custos de frete para o cliente.
+<h3 class="text-2xl font-bold mb-4">2.5 Análise de Viabilidade</h3>
+        <p class="text-slate-600 leading-relaxed">
+          A viabilidade técnica do projeto é alta, pois a equipe de desenvolvimento utilizará tecnologias consolidadas como React e Node.js. O maior desafio, a integração com o sistema de gestão de estoque existente, será realizado via APIs RESTful, uma abordagem padrão de mercado que a equipe domina.
+O prazo estimado para o desenvolvimento do MVP (Produto Mínimo Viável) é de
+cinco meses, dividido em sprints quinzenais. Este cronograma é considerado realista, pois permite entregas incrementais e validações constantes com o cliente, garantindo agilidade para ajustes.
+Em termos de competência da equipe, os desenvolvedores possuem o conhecimento necessário para implementar as funcionalidades propostas, incluindo a sincronização de estoque, sistemas de pagamento e as melhores práticas de segurança.
+<h3 class="text-2xl font-bold mb-4">2.6 Impacto da Solução</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Espera-se que a nova plataforma de e-commerce traga uma série de benefícios diretos para a Unidade Tática:
+Aumento das Vendas e Expansão de Mercado A plataforma permitirá que a Unidade Tática alcance novos clientes e aumente a quantidade de vendas no meio digital.
+Melhoria na Gestão de Estoque e Redução de Erros A integração automática garantirá uma gestão de estoque precisa, reduzindo falhas operacionais e cancelamentos de pedidos.
+Eficiência Operacional e Redução de Custos A automação de processos, como confirmação de pedidos e atualização de estoque, liberará a equipe para focar em atividades estratégicas, otimizando o tempo e reduzindo custos operacionais.
+Melhoria da Conversão e Experiência do Cliente Um site rápido, responsivo e com um checkout simplificado irá aumentar as taxas de conversão e reduzir o abandono de carrinho, proporcionando uma experiência de compra simples e intuitiva.
+Competitividade e Fidelização A nova solução permitirá que a Unidade Tática fortaleça sua presença no ambiente digital, ampliando sua competitividade e consolidando a fidelização dos clientes por meio de uma experiência de compra mais prática, segura e satisfatória.
+Conformidade com a LGPD e Segurança de Dados A plataforma será desenvolvida em conformidade com a LGPD, adotando práticas de proteção de dados que asseguram a privacidade dos clientes e reforçam a confiança na marca.
+
+
+      <!-- Seção 3 -->
+      <section id="estrategias" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+        <div id="segmentacao" class="bg-white p-8 rounded-xl shadow-lg"></div>
+  <!-- 3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE -->
+  <h2 class="text-3xl font-bold text-slate-900">3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE</h2>
+
+  <!-- 3.1 Estratégia Priorizada -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">3.1 Estratégia Priorizada</h3>
+    <ul class="list-disc list-inside text-slate-600 space-y-2">
+      <li><strong>Abordagem:</strong> Híbrida</li>
+      <li><strong>Ciclo de Vida:</strong> Iterativo e incremental</li>
+      <li><strong>Processo:</strong> RAD</li>
+    </ul>
+  </div>
+
+  <!-- 3.2 Quadro Comparativo -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">3.2 Quadro Comparativo</h3>
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full border-collapse border border-gray-200 text-slate-700">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border border-gray-200 px-4 py-2 text-left">Características</th>
+            <th class="border border-gray-200 px-4 py-2 text-left">RAD (Rapid Application Development)</th>
+            <th class="border border-gray-200 px-4 py-2 text-left">XP (Extreme Programming)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Abordagem Geral</td>
+            <td class="border border-gray-200 px-4 py-2">Processo híbrido/adaptativo, iterativo e incremental, com foco em desenvolvimento rápido e prototipagem.</td>
+            <td class="border border-gray-200 px-4 py-2">Processo ágil, iterativo e incremental, com foco em qualidade de código, práticas de programação e feedback contínuo.</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Foco em Arquitetura</td>
+            <td class="border border-gray-200 px-4 py-2">Menor ênfase em arquitetura robusta no início; prioriza protótipos funcionais que podem ser evoluídos ou descartados.</td>
+            <td class="border border-gray-200 px-4 py-2">Arquitetura emerge gradualmente junto com o código, apoiada em refatoração contínua e simplicidade de design.</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Estrutura de Processos</td>
+            <td class="border border-gray-200 px-4 py-2">Ciclos curtos de prototipagem, revisão com o cliente e iterações rápidas; menos formal e documentado.</td>
+            <td class="border border-gray-200 px-4 py-2">Práticas técnicas (pair programming, TDD, integração contínua) em iterações de 1–2 semanas.</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Flexibilidade de Requisitos</td>
+            <td class="border border-gray-200 px-4 py-2">Alta flexibilidade; requisitos mudam conforme protótipos são avaliados pelo cliente.</td>
+            <td class="border border-gray-200 px-4 py-2">Altíssima flexibilidade; requisitos podem mudar a cada iteração com base em feedback e testes.</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Colaboração com Cliente</td>
+            <td class="border border-gray-200 px-4 py-2">Cliente participa ativamente das validações dos protótipos, mas não em todas as etapas.</td>
+            <td class="border border-gray-200 px-4 py-2">Cliente integrado à equipe, com validação diária/por iteração.</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Adaptação ao Projeto</td>
+            <td class="border border-gray-200 px-4 py-2">Ideal para entregas rápidas e validação inicial (ex.: sistemas comerciais, e-commerces).</td>
+            <td class="border border-gray-200 px-4 py-2">Ideal para alta qualidade técnica e ciclos curtos de feedback (ex.: software crítico).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.3 Justificativa -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">3.3 Justificativa</h3>
+    <ul class="list-disc list-inside text-slate-600 space-y-4">
+      <li>
+        <strong>Prototipagem e Entregas Rápidas:</strong> Como este é o primeiro produto digital da empresa, é fundamental validar funcionalidades em curto prazo. O RAD permite criar protótipos funcionais em ciclos iterativos, possibilitando feedback imediato e ajustes rápidos.
+      </li>
+      <li>
+        <strong>Flexibilidade de Requisitos:</strong> Requisitos iniciais podem evoluir à medida que a solução avança. O RAD, aliado ao modelo iterativo, incorpora mudanças sem comprometer o cronograma.
+      </li>
+      <li>
+        <strong>Aproveitamento da Proximidade com o Cliente:</strong> A comunicação próxima favorece revisões constantes. O RAD prevê validação frequente de protótipos, permitindo ao cliente participar ativamente e sugerir melhorias.
+      </li>
+      <li>
+        <strong>Adequação ao Contexto da Equipe:</strong> Com seis integrantes capacitados e boa comunicação interna, o time organiza-se em ciclos curtos de desenvolvimento, entregando valor a cada iteração. Essa dinâmica híbrida supera modelos rígidos que exigem definição completa antes da implementação.
+      </li>
+      <p class="text-slate-600 leading-relaxed">
+          Assim, a escolha pelo RAD dentro de uma abordagem híbrida garante que o projeto seja desenvolvido de forma ágil, adaptável e alinhada às necessidades reais da Unidade Tática, equilibrando velocidade de entrega, flexibilidade e qualidade.
+    </ul>
+  </div>
+</section>
+    <!-- Seção 4 -->
+     <section id="cronograma" class="max-w-5xl mx-auto px-6 py-20 space-y-8">
+  <!-- 4. CRONOGRAMA E ENTREGAS -->
+  <h2 class="text-3xl font-bold text-slate-900">4. CRONOGRAMA E ENTREGAS</h2>
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-200 text-slate-700">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border border-gray-200 px-4 py-2 text-left">Sprint</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Início</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Fim</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Objetivo Principal</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Entregas Esperadas</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Validação do Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">1</td>
+          <td class="border border-gray-200 px-4 py-2">23/09/25</td>
+          <td class="border border-gray-200 px-4 py-2">29/09/25</td>
+          <td class="border border-gray-200 px-4 py-2">Planejamento e Ambiente</td>
+          <td class="border border-gray-200 px-4 py-2">Backlog inicial definido; ambiente de desenvolvimento configurado.</td>
+          <td class="border border-gray-200 px-4 py-2">Revisão do backlog e prioridades.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">2</td>
+          <td class="border border-gray-200 px-4 py-2">30/09/25</td>
+          <td class="border border-gray-200 px-4 py-2">06/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">Módulo de Produtos (Admin)</td>
+          <td class="border border-gray-200 px-4 py-2">Cadastro, edição e exclusão de produtos.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação da gestão de produtos.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">3</td>
+          <td class="border border-gray-200 px-4 py-2">07/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">13/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">Vitrine e Visualização</td>
+          <td class="border border-gray-200 px-4 py-2">Páginas de listagem e detalhes de produtos para o cliente.</td>
+          <td class="border border-gray-200 px-4 py-2">Feedback sobre a navegação e interface.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">4</td>
+          <td class="border border-gray-200 px-4 py-2">14/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">20/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">Carrinho de Compras</td>
+          <td class="border border-gray-200 px-4 py-2">Adicionar/remover itens do carrinho.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação do fluxo do carrinho.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">5</td>
+          <td class="border border-gray-200 px-4 py-2">21/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">27/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">Checkout Inicial</td>
+          <td class="border border-gray-200 px-4 py-2">Checkout funcional com opção de pagamento (Pix).</td>
+          <td class="border border-gray-200 px-4 py-2">Teste do fluxo de compra completo.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">6</td>
+          <td class="border border-gray-200 px-4 py-2">28/10/25</td>
+          <td class="border border-gray-200 px-4 py-2">03/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">Contas de Usuário</td>
+          <td class="border border-gray-200 px-4 py-2">Cadastro, login e área do cliente para ver pedidos.</td>
+          <td class="border border-gray-200 px-4 py-2">Feedback sobre a área do cliente.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">7</td>
+          <td class="border border-gray-200 px-4 py-2">04/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">10/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">Integração de Estoque</td>
+          <td class="border border-gray-200 px-4 py-2">Integração básica com o estoque físico.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação da sincronização de estoque.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">8</td>
+          <td class="border border-gray-200 px-4 py-2">11/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">17/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">Opções de Entrega</td>
+          <td class="border border-gray-200 px-4 py-2">Retirada em loja; envio por transportadora.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação das opções de frete.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">9</td>
+          <td class="border border-gray-200 px-4 py-2">18/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">24/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">Relatórios (Admin)</td>
+          <td class="border border-gray-200 px-4 py-2">Relatórios de vendas; métricas de movimentação de estoque.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação dos relatórios.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">10</td>
+          <td class="border border-gray-200 px-4 py-2">25/11/25</td>
+          <td class="border border-gray-200 px-4 py-2">01/12/25</td>
+          <td class="border border-gray-200 px-4 py-2">Segurança e LGPD</td>
+          <td class="border border-gray-200 px-4 py-2">Implementação de autenticação e proteção de dados.</td>
+          <td class="border border-gray-200 px-4 py-2">Validação da conformidade de segurança.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">11</td>
+          <td class="border border-gray-200 px-4 py-2">02/12/25</td>
+          <td class="border border-gray-200 px-4 py-2">08/12/25</td>
+          <td class="border border-gray-200 px-4 py-2">Ajustes Finais</td>
+          <td class="border border-gray-200 px-4 py-2">Refinamento da interface e correções gerais.</td>
+          <td class="border border-gray-200 px-4 py-2">Revisão final com feedback do cliente.</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-200 px-4 py-2">12</td>
+          <td class="border border-gray-200 px-4 py-2">09/12/25</td>
+          <td class="border border-gray-200 px-4 py-2">11/12/25</td>
+          <td class="border border-gray-200 px-4 py-2">Entrega Final</td>
+          <td class="border border-gray-200 px-4 py-2">Sistema consolidado e homologado.</td>
+          <td class="border border-gray-200 px-4 py-2">Aprovação final e aceite do cliente.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+    <!-- Seção 5 -->
+     <section id="interacao" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+  <!-- 5. INTERAÇÃO ENTRE EQUIPE E CLIENTE -->
+  <h2 class="text-3xl font-bold text-slate-900">5. INTERAÇÃO ENTRE EQUIPE E CLIENTE</h2>
+
+  <!-- 5.1 Composição da Equipe -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">5.1 Composição da Equipe</h3>
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full border-collapse border border-gray-200 text-slate-700">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border border-gray-200 px-4 py-2 text-left">Papel</th>
+            <th class="border border-gray-200 px-4 py-2 text-left">Descrição</th>
+            <th class="border border-gray-200 px-4 py-2 text-left">Participantes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Gerente de Projeto</td>
+            <td class="border border-gray-200 px-4 py-2">Coordena o projeto, garante a comunicação entre cliente e equipe, controla prazos e entregas.</td>
+            <td class="border border-gray-200 px-4 py-2">—</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Desenvolvedor Full Stack</td>
+            <td class="border border-gray-200 px-4 py-2">Responsável pelo desenvolvimento em todas as camadas (frontend, backend, banco de dados e integrações).</td>
+            <td class="border border-gray-200 px-4 py-2">Gabriel; Pedro; Pedro Barreto; Luis; Maria</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Analista de Qualidade (QA/Testes)</td>
+            <td class="border border-gray-200 px-4 py-2">Garante a qualidade do produto, planejando e executando testes de funcionalidade, desempenho e usabilidade.</td>
+            <td class="border border-gray-200 px-4 py-2">—</td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="border border-gray-200 px-4 py-2">Analista de Requisitos</td>
+            <td class="border border-gray-200 px-4 py-2">Apoia na definição e refinamento dos requisitos funcionais e não funcionais, assegurando alinhamento com o cliente.</td>
+            <td class="border border-gray-200 px-4 py-2">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5.2 Comunicação -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">5.2 Comunicação</h3>
+    <div class="space-y-6 text-slate-600">
+      <div>
+        <h4 class="text-xl font-medium mb-2">Ferramentas de Comunicação</h4>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Microsoft Teams:</strong> utilizado para reuniões de planejamento, acompanhamento e validação com o cliente.</li>
+          <li><strong>WhatsApp:</strong> usado para alinhamentos rápidos e comunicação diária da equipe.</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xl font-medium mb-2">Métodos e Frequência de Reuniões</h4>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>Reunião semanal com o cliente:</strong> apresentação de protótipos, validação de funcionalidades e coleta de feedback.</li>
+          <li><strong>Reuniões internas da equipe:</strong> encontros curtos conforme necessidade para sincronização de atividades e planejamento.</li>
+          <li><strong>Reunião de revisão geral:</strong> ao final de cada ciclo, revisão das entregas, análise de aprendizados e definição de melhorias.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.3 Processo de Validação -->
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-800 mb-4">5.3 Processo de Validação</h3>
+    <ul class="list-disc list-inside text-slate-600 space-y-2">
+      <li><strong>Definition of Ready (DoR):</strong> verificação de requisitos e critérios de aceitação antes de iniciar uma tarefa.</li>
+      <li><strong>Definition of Done (DoD):</strong> funcionalidade considerada pronta após testes, revisão de código e atendimento aos critérios de qualidade.</li>
+      <li><strong>Testes de Aceitação:</strong> entrega ao cliente ao final de cada sprint para validação do atendimento aos requisitos e expectativas.</li>
+    </ul>
+  </div>
+      <!-- Seção 6 -->
+  <section id="licoes" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+    <h3 class="text-2xl font-bold mb-4">6.1 Unidade 1</h3>
+    <p class="text-slate-600 leading-relaxed">
+      Durante esta unidade, a equipe aprendeu os conceitos de abordagem, ciclo de vida e processo de desenvolvimento de software, compreendendo como diferentes modelos podem ser aplicados em projetos reais. Essa base foi essencial para que o grupo definisse a estratégia do projeto da Unidade Tática, optando por uma abordagem híbrida, com ciclo de vida iterativo e incremental e o processo RAD como mais adequado ao contexto.
+      Em relação às dificuldades, a equipe enfrentou desafios na organização dos horários para reuniões internas, uma vez que no início ainda não havia uma rotina consolidada. Esse problema foi gradualmente superado à medida que o grupo estruturou uma comunicação mais clara e passou a definir previamente os momentos de encontro, o que contribuiu para uma melhor colaboração e alinhamento entre os integrantes.
+    </p>
+  </section>
+
+  <!-- Seção 7 -->
+  <section id="referencias" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
+    <h3 class="text-2xl font-bold mb-4">7. REFERÊNCIAS BIBLIOGRÁFICAS</h3>
+    <p class="text-slate-600 leading-relaxed">
+      [Listar as referências utilizadas para a construção deste documento]
+    </p>
+  </section>
+
+  </section>  <!-- fecha wrapper principal (md:col-span-3) -->
+</main>
+
+<!-- rodapé -->
+<footer class="bg-slate-800 text-slate-300 mt-20">
+  <div class="max-w-5xl mx-auto px-6 py-8 text-center">
+    <p>&copy; 2025 Unidade Tática - Projeto de E-commerce. Todos os direitos reservados.</p>
+  </div>
+</footer>
 </body>
 </html>
