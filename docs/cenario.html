@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -28,36 +30,31 @@
     </div>
   </nav>
 
-  <!-- layout: sidebar + conteúdo -->
-  <main class="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
+  <!-- layout principal -->
+  <main class="max-w-5xl mx-auto px-6 py-12">
 
-    <!-- sidebar (oculta em mobile) -->
-    <aside
-  class="hidden md:block sticky top-20 h-[calc(100vh-5rem)] overflow-auto pr-4"
->
-  <nav>
-    <ul class="space-y-4 font-medium text-slate-700">
-      <li><a href="#contexto" class="block hover:text-blue-600">1. CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO</a></li>
-      <li><a href="#desafios" class="block hover:text-blue-600">2. SOLUÇÃO PROPOSTA</a></li>
-      <li><a href="#estrategias" class="block hover:text-blue-600">3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE</a></li>
-      <li><a href="#cronograma" class="block hover:text-blue-600">4. CRONOGRAMA E ENTREGAS</a></li>
-      <li><a href="#interacao" class="block hover:text-blue-600">5. INTERAÇÃO ENTRE EQUIPE E CLIENTE</a></li>
-      <li><a href="#licoes" class="block hover:text-blue-600">6. LIÇÕES APRENDIDAS</a></li>
-      <li><a href="#referencias" class="block hover:text-blue-600">7. REFERÊNCIAS</a></li>
-    </ul>
-  </nav>
-</aside>
+    <!-- título -->
+    <div class="text-center mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Visão do Produto e Projeto</h1>
+    </div>
 
+    <!-- abas -->
+    <div>
+      <ul class="flex border-b mb-6 overflow-x-auto text-sm font-semibold text-slate-700">
+        <li><button class="tab-btn px-4 py-2 border-b-2 border-blue-600 text-blue-600" data-tab="contexto">1. Cenário Atual</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="desafios">2. Solução Proposta</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="estrategias">3. Estratégias</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="cronograma">4. Cronograma</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="interacao">5. Interação</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="licoes">6. Lições Aprendidas</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="referencias">7. Referências</button></li>
+      </ul>
+    </div>
 
-    <!-- conteúdo principal -->
-    <section class="md:col-span-3 space-y-12">
+    <!-- conteúdos das abas -->
+    <div id="contexto" class="tab-content active bg-white p-6 rounded-xl shadow-lg">
 
-      <!-- introdução -->
-      <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Visão do Produto e Projeto</h1>
-        </div>
-
-      <!-- Seção 1 -->
+      <p class="text-slate-600 leading-relaxed"> <!-- Seção 1 -->
       <div id="contexto" class="bg-white p-8 rounded-xl shadow-lg">
         <h2 class="text-2xl font-bold mb-4">1. CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO</h2>
         <h3 class="text-2xl font-bold mb-4">1.1 Introdução ao Negócio e Contexto</h3>
@@ -113,11 +110,13 @@
 </div>
 
         </p>
-      </div>
+      </div></p>
+    </div>
 
-      <!-- Seção 2 -->
+    <div id="desafios" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">2. Solução Proposta</h2>
+      <p class="text-slate-600 leading-relaxed"> <!-- Seção 2 -->
       <div id="desafios" class="bg-white p-8 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-bold mb-4">2. SOLUÇÃO PROPOSTA</h2>
         <h3 class="text-2xl font-bold mb-4">2.1 Objetivo do Produto</h3>
         <p class="text-slate-600 leading-relaxed">
           O objetivo do produto é implementar uma plataforma de e-commerce que permita à Unidade Tática expandir sua presença no mercado digital, oferecendo aos clientes uma experiência de compra prática e segura, enquanto possibilita ao administrador maior eficiência no controle de estoque, acompanhamento das vendas e gestão dos processos de entrega.
@@ -269,18 +268,18 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
     <h4 class="font-bold text-green-900">Conformidade com a LGPD e Segurança de Dados</h4>
     <p class="text-green-800 mt-1">
       A plataforma será desenvolvida em conformidade com a LGPD, adotando práticas de proteção de dados que asseguram a privacidade dos clientes e reforçam a confiança na marca.
-    </p>
+     </p>
   </div>
 </div>
 
-      <!-- Seção 3 -->
+        </p>
+      </div></p>
+    </div>
+    <div id="estrategias" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">3. Estratégias de Engenharia de Software</h2>
+      <p class="text-slate-600 leading-relaxed"> <!-- Seção 3 -->
       <section id="estrategias" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
-        <div id="segmentacao" class="bg-white p-8 rounded-xl shadow-lg"></div>
-  <!-- 3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE -->
-  <h2 class="text-3xl font-bold text-slate-900">3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE</h2>
-
-  <!-- 3.1 Estratégia Priorizada -->
-  <div>
+        <div id="segmentacao" class="bg-white p-8 rounded-xl shadow-lg"> <div>
     <h3 class="text-2xl font-semibold text-slate-800 mb-4">3.1 Estratégia Priorizada</h3>
     <ul class="list-disc list-inside text-slate-600 space-y-2">
       <li><strong>Abordagem:</strong> Híbrida</li>
@@ -357,9 +356,15 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
           Assim, a escolha pelo RAD dentro de uma abordagem híbrida garante que o projeto seja desenvolvido de forma ágil, adaptável e alinhada às necessidades reais da Unidade Tática, equilibrando velocidade de entrega, flexibilidade e qualidade.
     </ul>
   </div>
-</section>
-    <!-- Seção 4 -->
-<section id="cronograma" class="bg-white p-8 rounded-xl shadow-lg space-y-6">
+</section></div>
+  <!-- 3. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE -->
+
+  <!-- 3.1 Estratégia Priorizada -->
+ </p>
+    </div>
+
+    <div id="cronograma" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <p class="text-slate-600 leading-relaxed"><section id="cronograma" class="bg-white p-8 rounded-xl shadow-lg space-y-6">
   <h2 class="text-2xl font-bold mb-4">4. CRONOGRAMA E ENTREGAS</h2>
   <div class="overflow-x-auto">
     <table class="table-auto w-full border-collapse border border-gray-200 text-slate-700">
@@ -442,8 +447,11 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
     </table>
   </div>
 </section>
+</p>
+    </div>
 
-    <!-- Seção 5 -->
+    <div id="interacao" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <p class="text-slate-600 leading-relaxed"> <!-- Seção 5 -->
      <section id="interacao" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
   <!-- 5. INTERAÇÃO ENTRE EQUIPE E CLIENTE -->
   <h2 class="text-3xl font-bold text-slate-900">5. INTERAÇÃO ENTRE EQUIPE E CLIENTE</h2>
@@ -516,8 +524,11 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
       <li><strong>Definition of Done (DoD):</strong> funcionalidade considerada pronta após testes, revisão de código e atendimento aos critérios de qualidade.</li>
       <li><strong>Testes de Aceitação:</strong> entrega ao cliente ao final de cada sprint para validação do atendimento aos requisitos e expectativas.</li>
     </ul>
-  </div>
-      <!-- Seção 6 -->
+  </div></p>
+    </div>
+
+    <div id="licoes" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <p class="text-slate-600 leading-relaxed"><!-- Seção 6 -->
   <section id="licoes" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
     <h2 class="text-3xl font-bold text-slate-900">6. LIÇÕES APRENDIDAS</h2>
     <h3 class="text-2xl font-bold mb-4">6.1 Unidade 1</h3>
@@ -525,9 +536,11 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
       Durante esta unidade, a equipe aprendeu os conceitos de abordagem, ciclo de vida e processo de desenvolvimento de software, compreendendo como diferentes modelos podem ser aplicados em projetos reais. Essa base foi essencial para que o grupo definisse a estratégia do projeto da Unidade Tática, optando por uma abordagem híbrida, com ciclo de vida iterativo e incremental e o processo RAD como mais adequado ao contexto.
       Em relação às dificuldades, a equipe enfrentou desafios na organização dos horários para reuniões internas, uma vez que no início ainda não havia uma rotina consolidada. Esse problema foi gradualmente superado à medida que o grupo estruturou uma comunicação mais clara e passou a definir previamente os momentos de encontro, o que contribuiu para uma melhor colaboração e alinhamento entre os integrantes.
     </p>
-  </section>
+  </section></p>
+    </div>
 
-  <!-- Seção 7 -->
+    <div id="referencias" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+            <p class="text-slate-600 leading-relaxed"><!-- Seção 7 -->
   <section id="referencias" class="max-w-5xl mx-auto px-6 py-20 space-y-12">
     <h3 class="text-2xl font-bold mb-4">7. REFERÊNCIAS BIBLIOGRÁFICAS</h3>
     <p class="text-slate-600 leading-relaxed">
@@ -537,8 +550,25 @@ Em termos de competência da equipe, os desenvolvedores possuem o conhecimento n
   </section>
 
   </section>  <!-- fecha wrapper principal (md:col-span-3) -->
-</main>
+</main></p>
+    </div>
+  </main>
 
+  <!-- script tabs -->
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('text-blue-600', 'border-blue-600'));
+        tab.classList.add('text-blue-600', 'border-blue-600');
+
+        contents.forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
 <!-- rodapé -->
 <footer class="bg-slate-800 text-slate-300 mt-20">
   <div class="max-w-5xl mx-auto px-6 py-8 text-center">
