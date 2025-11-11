@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18 AS build
+FROM node:20 AS build
 
 WORKDIR /usr/src/app
 
@@ -15,6 +15,9 @@ FROM nginx:alpine
 
 # Copia build para o diretório padrão do nginx
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
+# Copia configuração customizada do nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expõe a porta 80
 EXPOSE 80
