@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
-import './CategoryPage.css';
+import './css/CategoryPage.css';
 
 const CategoryPage = ({ category, title, description }) => {
   const [products, setProducts] = useState([]);

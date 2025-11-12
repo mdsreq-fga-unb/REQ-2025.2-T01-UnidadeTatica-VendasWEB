@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import logoVetorizada from '../assets/logovetorizada.png';
-import '../App.css';
+import './css/Home.css';
 
 function Home() {
   const [users, setUsers] = useState([]);
@@ -21,7 +21,7 @@ function Home() {
         {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
-            <img  alt="Unidade Tática" className="hero-logo" />
+            <img src={logoVetorizada} alt="Unidade Tática" className="hero-logo" />
             <h1 className="hero-title">
               Bem-vindo à Unidade Tática
             </h1>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import './Contato.css';
+import './css/Contato.css';
 
 const Contato = () => {
   const [formData, setFormData] = useState({

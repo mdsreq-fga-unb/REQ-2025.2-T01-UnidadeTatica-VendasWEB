@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { AdminRoute } from './components/ProtectedRoute';
+import { AdminRoute, PrivateRoute } from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
@@ -12,7 +12,9 @@ import Cutelaria from './pages/Cutelaria';
 import Bordados from './pages/Bordados';
 import Acessorios from './pages/Acessorios';
 import Contato from './pages/Contato';
-import './App.css';
+import Perfil from './pages/Perfil';
+import Carrinho from './pages/Carrinho';
+import MeusPedidos from './pages/MeusPedidos';
 
 function App() {
   return (
@@ -29,6 +31,34 @@ function App() {
           <Route path="/acessorios" element={<Acessorios />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/entrar" element={<Login />} />
+          
+          {/* Rotas Protegidas - Requerem Login */}
+          <Route 
+            path="/perfil" 
+            element={
+              <PrivateRoute>
+                <Perfil />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/carrinho" 
+            element={
+              <PrivateRoute>
+                <Carrinho />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/meus-pedidos" 
+            element={
+              <PrivateRoute>
+                <MeusPedidos />
+              </PrivateRoute>
+            } 
+          />
+          
+          {/* Rota Admin - Requer Login + Role Admin */}
           <Route 
             path="/admin" 
             element={

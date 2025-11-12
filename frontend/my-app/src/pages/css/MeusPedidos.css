@@ -1,0 +1,264 @@
+/* Meus Pedidos Page Styles */
+.pedidos-page {
+  min-height: calc(100vh - 80px);
+  background: #f5f5f5;
+  padding: 40px 20px;
+}
+
+.pedidos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pedidos-container h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  color: #151203;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Pedidos Vazio */
+.pedidos-vazio {
+  text-align: center;
+  padding: 80px 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.empty-icon {
+  font-size: 6rem;
+  display: block;
+  margin-bottom: 30px;
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.pedidos-vazio h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #151203;
+  margin-bottom: 15px;
+}
+
+.pedidos-vazio p {
+  font-size: 1.1rem;
+  color: #605C5C;
+}
+
+/* Pedidos Lista */
+.pedidos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.pedido-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pedido-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Pedido Header */
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.pedido-info h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  color: #151203;
+  margin: 0 0 5px 0;
+}
+
+.pedido-data {
+  font-size: 0.9rem;
+  color: #605C5C;
+  margin: 0;
+}
+
+.pedido-status {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-processing {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.status-shipped {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-delivered {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Pedido Items */
+.pedido-items {
+  padding: 20px 30px;
+}
+
+.pedido-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pedido-item:last-child {
+  border-bottom: none;
+}
+
+.pedido-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.item-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #151203;
+  margin: 0;
+}
+
+.item-qty {
+  font-size: 0.9rem;
+  color: #605C5C;
+  margin: 0;
+}
+
+.item-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #151203;
+  margin: 0;
+}
+
+/* Pedido Footer */
+.pedido-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: #f9f9f9;
+  border-top: 2px solid #e0e0e0;
+}
+
+.pedido-total {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #151203;
+  margin: 0;
+}
+
+.btn-detalhes {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #151203 0%, #2a2515 100%);
+  color: #d4d1cf;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-detalhes:hover {
+  background: linear-gradient(135deg, #8b7d6b 0%, #a89885 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21, 18, 3, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pedidos-page {
+    padding: 20px 15px;
+  }
+
+  .pedidos-container h1 {
+    font-size: 2rem;
+  }
+
+  .pedido-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .pedido-items,
+  .pedido-footer {
+    padding: 20px;
+  }
+
+  .pedido-item {
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .pedido-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .item-price {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .pedido-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .btn-detalhes {
+    width: 100%;
+  }
+}
