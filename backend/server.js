@@ -243,6 +243,159 @@ app.delete('/users/:id', authenticateToken, isAdmin, async (req, res) => {
   }
 });
 
+// ===== PRODUTOS =====
+
+// Listar todos os produtos (público)
+app.get('/products', async (req, res) => {
+  try {
+    const { category, active } = req.query;
+    let query = 'SELECT * FROM products WHERE 1=1';
+    const params = [];
+
+    if (category) {
+      query += ' AND category = ?';
+      params.push(category);
+    }
+
+    if (active !== undefined) {
+      query += ' AND is_active = ?';
+      params.push(active === 'true');
+    }
+
+    query += ' ORDER BY created_at DESC';
+
+    const [products] = await pool.query(query, params);
+    res.json(products);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar produtos' });
+  }
+});
+
+// Buscar produto por ID (público)
+app.get('/products/:id', async (req, res) => {
+  try {
+    const [products] = await pool.query('SELECT * FROM products WHERE id = ?', [req.params.id]);
+    
+    if (products.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
+
+    res.json(products[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar produto' });
+  }
+});
+
+// Criar produto (apenas admin)
+app.post('/products', authenticateToken, isAdmin, async (req, res) => {
+  const { name, description, price, category, stock, image_url, is_active } = req.body;
+
+  if (!name || !price || !category) {
+    return res.status(400).json({ error: 'Nome, preço e categoria são obrigatórios' });
+  }
+
+  try {
+    const [result] = await pool.query(
+      'INSERT INTO products (name, description, price, category, stock, image_url, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [name, description || null, price, category, stock || 0, image_url || null, is_active !== false]
+    );
+
+    const [newProduct] = await pool.query('SELECT * FROM products WHERE id = ?', [result.insertId]);
+
+    res.status(201).json({
+      message: 'Produto criado com sucesso',
+      product: newProduct[0]
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao criar produto' });
+  }
+});
+
+// Atualizar produto (apenas admin)
+app.put('/products/:id', authenticateToken, isAdmin, async (req, res) => {
+  const { name, description, price, category, stock, image_url, is_active } = req.body;
+  const productId = parseInt(req.params.id);
+
+  try {
+    // Verificar se produto existe
+    const [existing] = await pool.query('SELECT * FROM products WHERE id = ?', [productId]);
+    
+    if (existing.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
+
+    await pool.query(
+      'UPDATE products SET name = ?, description = ?, price = ?, category = ?, stock = ?, image_url = ?, is_active = ? WHERE id = ?',
+      [
+        name || existing[0].name,
+        description !== undefined ? description : existing[0].description,
+        price || existing[0].price,
+        category || existing[0].category,
+        stock !== undefined ? stock : existing[0].stock,
+        image_url !== undefined ? image_url : existing[0].image_url,
+        is_active !== undefined ? is_active : existing[0].is_active,
+        productId
+      ]
+    );
+
+    const [updated] = await pool.query('SELECT * FROM products WHERE id = ?', [productId]);
+
+    res.json({
+      message: 'Produto atualizado com sucesso',
+      product: updated[0]
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao atualizar produto' });
+  }
+});
+
+// Congelar/Descongelar produto (toggle is_active) (apenas admin)
+app.patch('/products/:id/toggle-active', authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const [product] = await pool.query('SELECT * FROM products WHERE id = ?', [req.params.id]);
+    
+    if (product.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
+
+    const newStatus = !product[0].is_active;
+
+    await pool.query('UPDATE products SET is_active = ? WHERE id = ?', [newStatus, req.params.id]);
+
+    const [updated] = await pool.query('SELECT * FROM products WHERE id = ?', [req.params.id]);
+
+    res.json({
+      message: `Produto ${newStatus ? 'ativado' : 'desativado'} com sucesso`,
+      product: updated[0]
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao alterar status do produto' });
+  }
+});
+
+// Deletar produto (apenas admin)
+app.delete('/products/:id', authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const [product] = await pool.query('SELECT * FROM products WHERE id = ?', [req.params.id]);
+    
+    if (product.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
+
+    await pool.query('DELETE FROM products WHERE id = ?', [req.params.id]);
+    
+    res.json({ message: 'Produto deletado com sucesso' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao deletar produto' });
+  }
+});
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
 

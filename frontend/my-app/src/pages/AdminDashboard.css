@@ -262,6 +262,26 @@
   margin: 0;
 }
 
+.coming-soon {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #151203;
+  margin-bottom: 1rem;
+}
+
+.coming-soon p {
+  color: #605C5C;
+  font-size: 1.2rem;
+}
+
 @media (max-width: 1024px) {
   .admin-container {
     flex-direction: column;

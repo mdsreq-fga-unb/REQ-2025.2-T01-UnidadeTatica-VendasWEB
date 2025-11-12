@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import logoUNDT from '../assets/logoUNDT.jpg';
+import logoVetorizada from '../assets/logovetorizada.png';
 import '../App.css';
 
 function Home() {
@@ -21,7 +21,7 @@ function Home() {
         {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
-            <img src={logoUNDT} alt="Unidade Tática" className="hero-logo" />
+            <img  alt="Unidade Tática" className="hero-logo" />
             <h1 className="hero-title">
               Bem-vindo à Unidade Tática
             </h1>

@@ -4,6 +4,14 @@ import { AdminRoute } from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import Geral from './pages/Geral';
+import Roupas from './pages/Roupas';
+import Calcados from './pages/Calcados';
+import Mochila from './pages/Mochila';
+import Cutelaria from './pages/Cutelaria';
+import Bordados from './pages/Bordados';
+import Acessorios from './pages/Acessorios';
+import Contato from './pages/Contato';
 import './App.css';
 
 function App() {
@@ -12,6 +20,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/geral" element={<Geral />} />
+          <Route path="/roupas" element={<Roupas />} />
+          <Route path="/calcados" element={<Calcados />} />
+          <Route path="/mochila" element={<Mochila />} />
+          <Route path="/cutelaria" element={<Cutelaria />} />
+          <Route path="/bordados" element={<Bordados />} />
+          <Route path="/acessorios" element={<Acessorios />} />
+          <Route path="/contato" element={<Contato />} />
           <Route path="/entrar" element={<Login />} />
           <Route 
             path="/admin" 

@@ -1,19 +1,88 @@
 -- Adicionar campos de autenticação na tabela users
-ALTER TABLE users 
-ADD COLUMN IF NOT EXISTS password VARCHAR(255),
-ADD COLUMN IF NOT EXISTS role ENUM('user', 'admin') DEFAULT 'user',
-ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
--- Criar índice único no email
-CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email);
+-- Adicionar coluna password se não existir
+SET @column_exists = (
+  SELECT COUNT(*) 
+  FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE TABLE_SCHEMA = 'meubanco' 
+  AND TABLE_NAME = 'users' 
+  AND COLUMN_NAME = 'password'
+);
 
--- Inserir usuário admin padrão (senha: admin123)
--- Hash bcrypt de 'admin123'
-INSERT IGNORE INTO users (name, email, password, role) 
-VALUES ('Administrador', 'admin@unidadetatica.com', '$2b$10$rQJZKvZXqFxH4kqHxBxH.uYPYKP3WB3k0LGPJqN6KL0K7XvYqYQZW', 'admin');
+SET @sql = IF(@column_exists = 0, 
+  'ALTER TABLE users ADD COLUMN password VARCHAR(255)', 
+  'SELECT "Column password already exists"');
 
--- Inserir usuário comum de teste (senha: user123)
--- Hash bcrypt de 'user123'
-INSERT IGNORE INTO users (name, email, password, role) 
-VALUES ('Usuário Teste', 'user@unidadetatica.com', '$2b$10$qFvzM8hPNxPvGxZ9lqH0xeYkQXqYQXqYQXqYQXqYQXqYQXqYQXqY.', 'user');
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- Adicionar coluna role se não existir
+SET @column_exists = (
+  SELECT COUNT(*) 
+  FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE TABLE_SCHEMA = 'meubanco' 
+  AND TABLE_NAME = 'users' 
+  AND COLUMN_NAME = 'role'
+);
+
+SET @sql = IF(@column_exists = 0, 
+  'ALTER TABLE users ADD COLUMN role ENUM(''user'', ''admin'') DEFAULT ''user''', 
+  'SELECT "Column role already exists"');
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- Adicionar coluna created_at se não existir
+SET @column_exists = (
+  SELECT COUNT(*) 
+  FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE TABLE_SCHEMA = 'meubanco' 
+  AND TABLE_NAME = 'users' 
+  AND COLUMN_NAME = 'created_at'
+);
+
+SET @sql = IF(@column_exists = 0, 
+  'ALTER TABLE users ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP', 
+  'SELECT "Column created_at already exists"');
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- Adicionar coluna updated_at se não existir
+SET @column_exists = (
+  SELECT COUNT(*) 
+  FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE TABLE_SCHEMA = 'meubanco' 
+  AND TABLE_NAME = 'users' 
+  AND COLUMN_NAME = 'updated_at'
+);
+
+SET @sql = IF(@column_exists = 0, 
+  'ALTER TABLE users ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP', 
+  'SELECT "Column updated_at already exists"');
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- Criar índice único no email se não existir
+SET @index_exists = (
+  SELECT COUNT(*) 
+  FROM INFORMATION_SCHEMA.STATISTICS 
+  WHERE TABLE_SCHEMA = 'meubanco' 
+  AND TABLE_NAME = 'users' 
+  AND INDEX_NAME = 'idx_users_email'
+);
+
+SET @sql = IF(@index_exists = 0, 
+  'CREATE UNIQUE INDEX idx_users_email ON users(email)', 
+  'SELECT "Index idx_users_email already exists"');
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SELECT 'Migração concluída com sucesso!' as message;

@@ -44,15 +44,15 @@ const Login = () => {
           {error && <div className="error-message">{error}</div>}
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Login</label>
             <input
-              type="email"
+              type="text"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="seu@email.com"
-              autoComplete="email"
+              placeholder="admin ou seu@email.com"
+              autoComplete="username"
             />
           </div>
 
@@ -82,8 +82,7 @@ const Login = () => {
 
           <div className="test-credentials">
             <p><strong>Credenciais de teste:</strong></p>
-            <p>Admin: admin@unidadetatica.com / admin123</p>
-            <p>User: user@unidadetatica.com / user123</p>
+            <p>🎖️ Admin: admin / senha123</p>
           </div>
         </form>
       </div>

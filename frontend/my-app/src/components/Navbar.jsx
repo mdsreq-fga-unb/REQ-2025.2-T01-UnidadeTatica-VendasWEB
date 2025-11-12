@@ -16,31 +16,31 @@ const Navbar = () => {
         {/* Menu de Navegação */}
         <ul className="navbar-menu">
           <li className="navbar-item">
-            <a href="#inicio" className="navbar-link">Início</a>
+            <Link to="/" className="navbar-link">Início</Link>
           </li>
           <li className="navbar-item">
-            <a href="#geral" className="navbar-link">Geral</a>
+            <Link to="/geral" className="navbar-link">Geral</Link>
           </li>
           <li className="navbar-item">
-            <a href="#roupas" className="navbar-link">Roupas</a>
+            <Link to="/roupas" className="navbar-link">Roupas</Link>
           </li>
           <li className="navbar-item">
-            <a href="#calcados" className="navbar-link">Calçados</a>
+            <Link to="/calcados" className="navbar-link">Calçados</Link>
           </li>
           <li className="navbar-item">
-            <a href="#mochila" className="navbar-link">Mochila</a>
+            <Link to="/mochila" className="navbar-link">Mochilas</Link>
           </li>
           <li className="navbar-item">
-            <a href="#cutelaria" className="navbar-link">Cutelaria</a>
+            <Link to="/cutelaria" className="navbar-link">Cutelaria</Link>
           </li>
           <li className="navbar-item">
-            <a href="#bordados" className="navbar-link">Bordados</a>
+            <Link to="/bordados" className="navbar-link">Bordados</Link>
           </li>
           <li className="navbar-item">
-            <a href="#acessorios" className="navbar-link">Acessórios</a>
+            <Link to="/acessorios" className="navbar-link">Acessórios</Link>
           </li>
           <li className="navbar-item">
-            <a href="#contato" className="navbar-link">Contato</a>
+            <Link to="/contato" className="navbar-link">Contato</Link>
           </li>
         </ul>
 

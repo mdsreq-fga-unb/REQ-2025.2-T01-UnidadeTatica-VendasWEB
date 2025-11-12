@@ -1,0 +1,406 @@
+/* Products Management Styles */
+.products-management {
+  padding: 20px;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.products-header h2 {
+  color: #151203;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  margin: 0;
+}
+
+.btn-add-product {
+  background-color: #151203;
+  color: #d4d1cf;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-add-product:hover {
+  background-color: #8b7d6b;
+  transform: scale(1.05);
+}
+
+/* Products Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background: white;
+  border: 2px solid #d4d1cf;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+}
+
+.product-card.inactive {
+  opacity: 0.6;
+  border-color: #605C5C;
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inactive-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4444;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.product-info {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.product-info h3 {
+  color: #151203;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  margin: 0 0 5px 0;
+}
+
+.product-category {
+  color: #8b7d6b;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.product-description {
+  color: #605C5C;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #d4d1cf;
+}
+
+.product-price {
+  color: #151203;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.product-stock {
+  color: #605C5C;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Product Actions */
+.product-actions {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #d4d1cf;
+}
+
+.product-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #4CAF50;
+}
+
+.btn-edit:hover {
+  background-color: #45a049;
+  transform: scale(1.1);
+}
+
+.btn-toggle {
+  background-color: #2196F3;
+}
+
+.btn-toggle.inactive {
+  background-color: #FF9800;
+}
+
+.btn-toggle:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.btn-delete {
+  background-color: #f44336;
+}
+
+.btn-delete:hover {
+  background-color: #da190b;
+  transform: scale(1.1);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #d4d1cf;
+  background-color: #151203;
+  color: #d4d1cf;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #d4d1cf;
+  transition: transform 0.3s ease;
+}
+
+.btn-close:hover {
+  transform: rotate(90deg);
+}
+
+/* Form Styles */
+.product-form {
+  padding: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #151203;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d4d1cf;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #8b7d6b;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group-checkbox {
+  margin-bottom: 20px;
+}
+
+.form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  color: #151203;
+  cursor: pointer;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #d4d1cf;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background-color: #605C5C;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #4a4747;
+}
+
+.btn-save {
+  background-color: #151203;
+  color: #d4d1cf;
+}
+
+.btn-save:hover {
+  background-color: #8b7d6b;
+  transform: scale(1.05);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 20px;
+  color: #605C5C;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .btn-add-product {
+    width: 100%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+}
