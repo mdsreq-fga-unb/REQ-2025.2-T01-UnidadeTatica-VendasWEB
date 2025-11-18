@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { createProduct, listProducts } = require("../services/productService")
 
-// POST /api/products  -> cadastra produto (RF01)
+// cadastra produto
 router.post("/", (req, res) => {
   try {
     const product = createProduct(req.body)
@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   }
 })
 
-// GET /api/products -> só pra ver o resultado dos cadastros
+// lista produtos
 router.get("/", (req, res) => {
   const products = listProducts()
   return res.json(products)
