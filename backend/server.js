@@ -1,3 +1,10 @@
+require('dotenv').config({ override: true });
+
+console.log("DEBUG ENV → DB_HOST:", process.env.DB_HOST);
+console.log("DEBUG ENV → DB_USER:", process.env.DB_USER);
+console.log("DEBUG ENV → DB_PASS:", process.env.DB_PASS);
+console.log("DEBUG ENV → DB_NAME:", process.env.DB_NAME);
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
