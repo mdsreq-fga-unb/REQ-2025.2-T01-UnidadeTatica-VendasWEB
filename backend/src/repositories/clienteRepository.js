@@ -24,7 +24,4 @@ async function inserirCliente(cliente) {
 
 
 
-module.exports = {
-    emailExiste,
-    inserirCliente
-};
+export {emailExiste, inserirCliente};
