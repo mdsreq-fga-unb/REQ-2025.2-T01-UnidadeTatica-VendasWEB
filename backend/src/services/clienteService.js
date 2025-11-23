@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import * as repo from '../repositories/clienteRepository.js';
 
-export async function CadastrarCliente(nome, email, senha, telefone) {
+async function CadastrarCliente(nome, email, senha, telefone) {
     if(await repo.emailExiste(email)){
         throw new Error("e-mail já cadastrado");//
     }
