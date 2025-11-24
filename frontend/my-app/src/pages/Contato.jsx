@@ -149,7 +149,7 @@ const Contato = () => {
             </div>
 
             <button type="submit" className="btn-enviar">
-              📨 Enviar Mensagem
+              Enviar Mensagem
             </button>
           </form>
         </div>
