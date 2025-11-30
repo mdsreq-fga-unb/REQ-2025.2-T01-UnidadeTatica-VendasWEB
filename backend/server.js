@@ -317,7 +317,7 @@ app.delete('/products/:id', authenticateToken, isAdmin, async (req, res) => {
 
   try {
     // Verificar se o produto existe
-    const checkResult = await pool.query('SELECT id FROM products WHERE id = ?', [id]);
+    const [checkResult] = await pool.query('SELECT id FROM products WHERE id = ?', [id]);
     
     if (!checkResult || checkResult.length === 0) {
       return res.status(404).json({ error: 'Produto não encontrado' });
