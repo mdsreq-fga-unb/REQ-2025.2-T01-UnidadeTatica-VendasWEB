@@ -14,27 +14,27 @@ router.post('/', async (req, res) => {
     const userId = req.user.id;
     const { order_id, items, total_amount } = req.body;
 
+    console.log('📦 Criando pedido:', { userId, order_id, items_count: items?.length, total_amount });
+
     if (!order_id || !items || !Array.isArray(items) || items.length === 0 || !total_amount) {
       return res.status(400).json({ error: 'Dados do pedido inválidos' });
     }
 
-    // Iniciar transação
-    const connection = await dbPool.getConnection();
-    await connection.beginTransaction();
-
     try {
-      // Criar o pedido
-      const [orderResult] = await connection.execute(
+      // Criar o pedido (sem transação para simplificar - PostgreSQL não suporta da mesma forma)
+      const [orderResult] = await dbPool.query(
         `INSERT INTO orders (order_id, user_id, total_amount, status, whatsapp_sent) 
-         VALUES (?, ?, ?, 'pendente', TRUE)`,
-        [order_id, userId, total_amount]
+         VALUES (?, ?, ?, ?, ?)
+         RETURNING id`,
+        [order_id, userId, total_amount, 'pendente', true]
       );
 
-      const orderId = orderResult.insertId;
+      const orderId = orderResult[0]?.id || orderResult.insertId;
+      console.log('✅ Pedido criado com ID:', orderId);
 
       // Inserir itens do pedido
       for (const item of items) {
-        await connection.execute(
+        await dbPool.query(
           `INSERT INTO order_items (order_id, product_id, product_name, product_category, quantity, unit_price, subtotal)
            VALUES (?, ?, ?, ?, ?, ?, ?)`,
           [
@@ -49,20 +49,19 @@ router.post('/', async (req, res) => {
         );
 
         // Atualizar estoque do produto
-        await connection.execute(
+        await dbPool.query(
           'UPDATE products SET stock = stock - ? WHERE id = ?',
           [item.quantity, item.product_id]
         );
       }
 
       // Limpar carrinho do usuário
-      await connection.execute(
+      await dbPool.query(
         'DELETE FROM cart_items WHERE user_id = ?',
         [userId]
       );
 
-      await connection.commit();
-      connection.release();
+      console.log('✅ Pedido finalizado com sucesso');
 
       res.status(201).json({
         message: 'Pedido criado com sucesso',
@@ -70,13 +69,13 @@ router.post('/', async (req, res) => {
         id: orderId
       });
     } catch (error) {
-      await connection.rollback();
-      connection.release();
+      console.error('❌ Erro ao processar pedido:', error);
       throw error;
     }
   } catch (error) {
-    console.error('Erro ao criar pedido:', error);
-    res.status(500).json({ error: 'Erro ao criar pedido' });
+    console.error('❌ Erro ao criar pedido:', error.message);
+    console.error('Stack:', error.stack);
+    res.status(500).json({ error: 'Erro ao criar pedido', details: error.message });
   }
 });
 
@@ -85,7 +84,7 @@ router.get('/', async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const [orders] = await dbPool.execute(
+    const [orders] = await dbPool.query(
       `SELECT o.*, u.name as user_name, u.email as user_email
        FROM orders o
        JOIN users u ON o.user_id = u.id
@@ -96,7 +95,7 @@ router.get('/', async (req, res) => {
 
     // Buscar itens de cada pedido
     for (let order of orders) {
-      const [items] = await dbPool.execute(
+      const [items] = await dbPool.query(
         `SELECT * FROM order_items WHERE order_id = ?`,
         [order.id]
       );
@@ -116,7 +115,7 @@ router.get('/:id', async (req, res) => {
     const userId = req.user.id;
     const orderId = req.params.id;
 
-    const [orders] = await dbPool.execute(
+    const [orders] = await dbPool.query(
       `SELECT o.*, u.name as user_name, u.email as user_email
        FROM orders o
        JOIN users u ON o.user_id = u.id
@@ -131,7 +130,7 @@ router.get('/:id', async (req, res) => {
     const order = orders[0];
 
     // Buscar itens do pedido
-    const [items] = await dbPool.execute(
+    const [items] = await dbPool.query(
       `SELECT * FROM order_items WHERE order_id = ?`,
       [order.id]
     );
