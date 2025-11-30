@@ -9,7 +9,6 @@ services:
   - type: web
     name: unidade-tatica-backend
     runtime: node
-    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
     healthCheckPath: /health
@@ -49,7 +48,6 @@ services:
   - type: web
     name: unidade-tatica-frontend
     runtime: static
-    plan: free
     buildCommand: cd frontend/my-app && npm install && npm run build
     staticPublishPath: ./frontend/my-app/dist
     routes:
