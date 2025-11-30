@@ -185,17 +185,22 @@ const ProductsManagement = () => {
       const response = await fetch(`${API_URL}/products/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       });
 
       if (response.ok) {
         await fetchProducts();
         alert('Produto deletado com sucesso!');
+      } else {
+        const error = await response.json();
+        console.error('Erro na resposta:', error);
+        alert(error.error || error.details || 'Erro ao deletar produto');
       }
     } catch (error) {
       console.error('Erro ao deletar:', error);
-      alert('Erro ao deletar produto');
+      alert('Erro ao deletar produto: ' + error.message);
     }
   };
 

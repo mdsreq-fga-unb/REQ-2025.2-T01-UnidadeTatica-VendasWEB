@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   try {
     const userId = req.user.id;
     
-    const [items] = await dbPool.execute(
+    const items = await dbPool.query(
       `SELECT 
         ci.id,
         ci.quantity,
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
         p.stock
       FROM cart_items ci
       JOIN products p ON ci.product_id = p.id
-      WHERE ci.user_id = ? AND p.is_active = 1`,
+      WHERE ci.user_id = ? AND p.is_active = true`,
       [userId]
     );
     
@@ -48,8 +48,8 @@ router.post('/', async (req, res) => {
     }
     
     // Verificar se o produto existe e está ativo
-    const [products] = await dbPool.execute(
-      'SELECT id, stock FROM products WHERE id = ? AND is_active = 1',
+    const products = await dbPool.query(
+      'SELECT id, stock FROM products WHERE id = ? AND is_active = true',
       [product_id]
     );
     
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
     }
     
     // Verificar se o item já está no carrinho
-    const [existingItems] = await dbPool.execute(
+    const existingItems = await dbPool.query(
       'SELECT id, quantity FROM cart_items WHERE user_id = ? AND product_id = ?',
       [userId, product_id]
     );
@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ error: 'Estoque insuficiente para esta quantidade' });
       }
       
-      await dbPool.execute(
+      await dbPool.query(
         'UPDATE cart_items SET quantity = ? WHERE id = ?',
         [newQuantity, existingItems[0].id]
       );
@@ -83,12 +83,13 @@ router.post('/', async (req, res) => {
       res.json({ message: 'Quantidade atualizada', id: existingItems[0].id });
     } else {
       // Adicionar novo item
-      const [result] = await dbPool.execute(
-        'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?)',
+      const result = await dbPool.query(
+        'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?) RETURNING id',
         [userId, product_id, quantity]
       );
       
-      res.status(201).json({ message: 'Item adicionado ao carrinho', id: result.insertId });
+      const insertId = result[0]?.id || result.insertId;
+      res.status(201).json({ message: 'Item adicionado ao carrinho', id: insertId });
     }
   } catch (error) {
     console.error('Erro ao adicionar ao carrinho:', error);
@@ -108,7 +109,7 @@ router.put('/:id', async (req, res) => {
     }
     
     // Verificar se o item pertence ao usuário
-    const [items] = await dbPool.execute(
+    const items = await dbPool.query(
       `SELECT ci.id, p.stock 
        FROM cart_items ci 
        JOIN products p ON ci.product_id = p.id 
@@ -124,7 +125,7 @@ router.put('/:id', async (req, res) => {
       return res.status(400).json({ error: 'Estoque insuficiente' });
     }
     
-    await dbPool.execute(
+    await dbPool.query(
       'UPDATE cart_items SET quantity = ? WHERE id = ?',
       [quantity, itemId]
     );
@@ -142,12 +143,12 @@ router.delete('/:id', async (req, res) => {
     const userId = req.user.id;
     const itemId = req.params.id;
     
-    const [result] = await dbPool.execute(
+    const result = await dbPool.query(
       'DELETE FROM cart_items WHERE id = ? AND user_id = ?',
       [itemId, userId]
     );
     
-    if (result.affectedRows === 0) {
+    if (!result || result.length === 0) {
       return res.status(404).json({ error: 'Item não encontrado no carrinho' });
     }
     
@@ -163,7 +164,7 @@ router.delete('/', async (req, res) => {
   try {
     const userId = req.user.id;
     
-    await dbPool.execute(
+    await dbPool.query(
       'DELETE FROM cart_items WHERE user_id = ?',
       [userId]
     );
