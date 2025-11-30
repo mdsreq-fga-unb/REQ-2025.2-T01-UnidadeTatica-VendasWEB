@@ -1,24 +1,14 @@
-services:
-  # MySQL Database
-  - type: pserv
-    name: unidade-tatica-db
-    env: docker
+databases:
+  - name: unidade-tatica-db
+    databaseName: unidade_tatica
     plan: free
-    dockerfilePath: ./Dockerfile.mysql
-    disk:
-      name: mysql-data
-      mountPath: /var/lib/mysql
-      sizeGB: 1
-    envVars:
-      - key: MYSQL_ROOT_PASSWORD
-        generateValue: true
-      - key: MYSQL_DATABASE
-        value: meubanco
+    user: unidade_tatica_user
 
+services:
   # Backend API
   - type: web
     name: unidade-tatica-backend
-    env: node
+    runtime: node
     plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
@@ -27,35 +17,38 @@ services:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 4000
+        value: 10000
       - key: DB_HOST
-        fromService:
+        fromDatabase:
           name: unidade-tatica-db
-          type: pserv
           property: host
       - key: DB_USER
-        value: root
-      - key: DB_PASS
-        fromService:
+        fromDatabase:
           name: unidade-tatica-db
-          type: pserv
-          envVarKey: MYSQL_ROOT_PASSWORD
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: unidade-tatica-db
+          property: password
       - key: DB_NAME
-        value: meubanco
+        fromDatabase:
+          name: unidade-tatica-db
+          property: database
       - key: DB_PORT
-        value: 3306
+        fromDatabase:
+          name: unidade-tatica-db
+          property: port
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGIN
-        fromService:
-          name: unidade-tatica-frontend
-          type: web
-          property: host
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
 
   # Frontend
   - type: web
     name: unidade-tatica-frontend
-    env: static
+    runtime: static
     plan: free
     buildCommand: cd frontend/my-app && npm install && npm run build
     staticPublishPath: ./frontend/my-app/dist
@@ -65,7 +58,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          name: unidade-tatica-backend
-          type: web
-          property: host
+        sync: false

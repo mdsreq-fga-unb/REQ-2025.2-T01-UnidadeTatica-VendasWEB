@@ -8,12 +8,12 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env', override: true });
 
 import express from 'express';
-import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 import fs from 'fs';
 import app from './src/app.js';
+import { pool } from './src/db.js';
 import productRoutes, { setPool } from './src/routes/productRoutes.js';
 import cartRoutes, { setPool as setCartPool } from './src/routes/cartRoutes.js';
 import orderRoutes, { setPool as setOrderPool } from './src/routes/orderRoutes.js';
@@ -71,17 +71,7 @@ const upload = multer({
 
 const JWT_SECRET = process.env.JWT_SECRET || 'unidade-tatica-secret-key-2025';
 
-// Conexão pool
-export const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-});
-
-// Configurar pool no productRoutes, cartRoutes e orderRoutes
+// Configurar pool nas rotas
 setPool(pool);
 setCartPool(pool);
 setOrderPool(pool);
