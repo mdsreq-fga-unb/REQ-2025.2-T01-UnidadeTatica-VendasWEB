@@ -7,8 +7,9 @@ WORKDIR /usr/src/app
 # Copia package.json e package-lock.json (ou yarn.lock)
 COPY package*.json ./
 
-# Instala dependências
+# Instala dependências e recompila pacotes nativos para Linux
 RUN npm install
+RUN npm rebuild bcrypt --build-from-source
 
 # Copia todo o código do backend
 COPY . .

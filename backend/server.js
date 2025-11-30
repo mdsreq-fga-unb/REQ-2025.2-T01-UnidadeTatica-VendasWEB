@@ -455,26 +455,27 @@ app.get('/admin/reports/sales', authenticateToken, isAdmin, async (req, res) => 
     let params = [];
     
     if (month && year) {
-      dateFilter = 'WHERE MONTH(o.created_at) = ? AND YEAR(o.created_at) = ?';
+      // PostgreSQL usa EXTRACT em vez de MONTH() e YEAR()
+      dateFilter = 'WHERE EXTRACT(MONTH FROM o.created_at) = ? AND EXTRACT(YEAR FROM o.created_at) = ?';
       params = [month, year];
     } else if (year) {
-      dateFilter = 'WHERE YEAR(o.created_at) = ?';
+      dateFilter = 'WHERE EXTRACT(YEAR FROM o.created_at) = ?';
       params = [year];
     }
 
     // Total de vendas (excluindo cancelados)
-    const [totalSales] = await pool.execute(
+    const [totalSales] = await pool.query(
       `SELECT 
         COUNT(*) as total_orders,
         SUM(total_amount) as total_revenue,
         AVG(total_amount) as average_order_value
        FROM orders o
-       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} status != 'cancelado'`,
-      params
+       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} status != ?`,
+      [...params, 'cancelado']
     );
 
     // Vendas por status (mostra todos, inclusive cancelados)
-    const [salesByStatus] = await pool.execute(
+    const [salesByStatus] = await pool.query(
       `SELECT 
         status,
         COUNT(*) as count,
@@ -482,12 +483,19 @@ app.get('/admin/reports/sales', authenticateToken, isAdmin, async (req, res) => 
        FROM orders o
        ${dateFilter}
        GROUP BY status
-       ORDER BY FIELD(status, 'pendente', 'confirmado', 'enviado', 'entregue', 'cancelado')`,
+       ORDER BY 
+         CASE status
+           WHEN 'pendente' THEN 1
+           WHEN 'confirmado' THEN 2
+           WHEN 'enviado' THEN 3
+           WHEN 'entregue' THEN 4
+           WHEN 'cancelado' THEN 5
+         END`,
       params
     );
 
     // Produtos mais vendidos (excluindo cancelados)
-    const [topProducts] = await pool.execute(
+    const [topProducts] = await pool.query(
       `SELECT 
         oi.product_name,
         oi.product_category,
@@ -495,39 +503,39 @@ app.get('/admin/reports/sales', authenticateToken, isAdmin, async (req, res) => 
         SUM(oi.subtotal) as total_revenue
        FROM order_items oi
        JOIN orders o ON oi.order_id = o.id
-       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != 'cancelado'
+       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != ?
        GROUP BY oi.product_id, oi.product_name, oi.product_category
        ORDER BY total_quantity DESC
        LIMIT 10`,
-      params
+      [...params, 'cancelado']
     );
 
     // Vendas por categoria (excluindo cancelados)
-    const [salesByCategory] = await pool.execute(
+    const [salesByCategory] = await pool.query(
       `SELECT 
         oi.product_category,
         SUM(oi.quantity) as total_quantity,
         SUM(oi.subtotal) as total_revenue
        FROM order_items oi
        JOIN orders o ON oi.order_id = o.id
-       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != 'cancelado'
+       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != ?
        GROUP BY oi.product_category
        ORDER BY total_revenue DESC`,
-      params
+      [...params, 'cancelado']
     );
 
     // Vendas diárias (últimos 30 dias ou do mês especificado, excluindo cancelados)
-    const [dailySales] = await pool.execute(
+    const [dailySales] = await pool.query(
       `SELECT 
         DATE(o.created_at) as date,
         COUNT(*) as orders_count,
         SUM(o.total_amount) as revenue
        FROM orders o
-       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != 'cancelado'
+       ${dateFilter ? dateFilter + ' AND' : 'WHERE'} o.status != ?
        GROUP BY DATE(o.created_at)
        ORDER BY date DESC
        LIMIT 30`,
-      params
+      [...params, 'cancelado']
     );
 
     res.json({
