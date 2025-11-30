@@ -19,7 +19,7 @@ const OrdersManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${API_URL}/admin/orders', {
+      const response = await fetch(`${API_URL}/admin/orders`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -38,7 +38,7 @@ const OrdersManagement = () => {
 
   const fetchPendingCount = async () => {
     try {
-      const response = await fetch(`${API_URL}/admin/orders/pending/count', {
+      const response = await fetch(`${API_URL}/admin/orders/pending/count`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

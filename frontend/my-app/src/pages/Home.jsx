@@ -16,7 +16,7 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${API_URL}/products');
+      const response = await fetch(`${API_URL}/products`);
       if (response.ok) {
         const data = await response.json();
         // Pegar apenas os 8 primeiros produtos

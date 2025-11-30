@@ -40,7 +40,7 @@ const Carrinho = () => {
         }))
       };
 
-      const response = await fetch(`${API_URL}/orders', {
+      const response = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

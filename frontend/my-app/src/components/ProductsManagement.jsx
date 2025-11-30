@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './ProductsManagement.css';
-import { API_URL } from '../config';
 
 const ProductsManagement = () => {
   const { token } = useAuth();
@@ -38,7 +37,7 @@ const ProductsManagement = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${API_URL}/products');
+      const response = await fetch('http://localhost:4000/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -90,7 +89,7 @@ const ProductsManagement = () => {
     formData.append('image', imageFile);
 
     try {
-      const response = await fetch(`${API_URL}/api/upload', {
+      const response = await fetch('http://localhost:4000/api/upload', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -130,8 +129,8 @@ const ProductsManagement = () => {
     }
 
     const url = editingProduct
-      ? `${API_URL}/products/${editingProduct.id}`
-      : `${API_URL}/products';
+      ? `http://localhost:4000/products/${editingProduct.id}`
+      : 'http://localhost:4000/products';
 
     const method = editingProduct ? 'PUT' : 'POST';
 
@@ -182,7 +181,7 @@ const ProductsManagement = () => {
     if (!confirm('Tem certeza que deseja deletar este produto?')) return;
 
     try {
-      const response = await fetch(`${API_URL}/products/${id}`, {
+      const response = await fetch(`http://localhost:4000/products/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -201,7 +200,7 @@ const ProductsManagement = () => {
 
   const handleToggleActive = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/products/${id}/toggle-active`, {
+      const response = await fetch(`http://localhost:4000/products/${id}/toggle-active`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`

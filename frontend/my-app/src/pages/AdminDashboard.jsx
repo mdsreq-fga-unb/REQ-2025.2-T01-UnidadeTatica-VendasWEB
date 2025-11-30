@@ -20,7 +20,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${API_URL}/users', {
+      const response = await fetch(`${API_URL}/users`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
