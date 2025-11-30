@@ -12,21 +12,42 @@ if (DB_TYPE === 'postgres') {
   // PostgreSQL (Render)
   console.log('🐘 Conectando ao PostgreSQL...');
   
-  const pgPool = new Pool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 5432,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 10000,
-  });
+  // Usar a DATABASE_URL se existir (Render fornece automaticamente)
+  const DATABASE_URL = process.env.DATABASE_URL;
+  
+  let pgPool;
+  
+  if (DATABASE_URL) {
+    console.log('📡 Usando DATABASE_URL do Render');
+    pgPool = new Pool({
+      connectionString: DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    });
+  } else {
+    console.log('📡 Usando variáveis individuais de ambiente');
+    pgPool = new Pool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      port: process.env.DB_PORT || 5432,
+      ssl: { rejectUnauthorized: false },
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    });
+  }
 
   // Tratamento de erros do pool
   pgPool.on('error', (err) => {
     console.error('❌ Erro inesperado no pool PostgreSQL:', err.message);
+  });
+
+  pgPool.on('connect', () => {
+    console.log('✅ Nova conexão PostgreSQL estabelecida');
   });
 
   // Adapter para manter interface compatível com mysql2
@@ -43,6 +64,7 @@ if (DB_TYPE === 'postgres') {
         return [result.rows, result.fields];
       } catch (error) {
         console.error('❌ Erro na query:', error.message);
+        console.error('Stack completo:', error.stack);
         throw error;
       }
     },
