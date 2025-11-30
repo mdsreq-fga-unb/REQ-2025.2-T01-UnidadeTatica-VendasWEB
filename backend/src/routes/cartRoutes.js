@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   try {
     const userId = req.user.id;
     
-    const items = await dbPool.query(
+    const [items] = await dbPool.query(
       `SELECT 
         ci.id,
         ci.quantity,
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     }
     
     // Verificar se o produto existe e está ativo
-    const products = await dbPool.query(
+    const [products] = await dbPool.query(
       'SELECT id, stock FROM products WHERE id = ? AND is_active = true',
       [product_id]
     );
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
     }
     
     // Verificar se o item já está no carrinho
-    const existingItems = await dbPool.query(
+    const [existingItems] = await dbPool.query(
       'SELECT id, quantity FROM cart_items WHERE user_id = ? AND product_id = ?',
       [userId, product_id]
     );
@@ -83,7 +83,7 @@ router.post('/', async (req, res) => {
       res.json({ message: 'Quantidade atualizada', id: existingItems[0].id });
     } else {
       // Adicionar novo item
-      const result = await dbPool.query(
+      const [result] = await dbPool.query(
         'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?) RETURNING id',
         [userId, product_id, quantity]
       );
@@ -109,7 +109,7 @@ router.put('/:id', async (req, res) => {
     }
     
     // Verificar se o item pertence ao usuário
-    const items = await dbPool.query(
+    const [items] = await dbPool.query(
       `SELECT ci.id, p.stock 
        FROM cart_items ci 
        JOIN products p ON ci.product_id = p.id 
@@ -143,7 +143,7 @@ router.delete('/:id', async (req, res) => {
     const userId = req.user.id;
     const itemId = req.params.id;
     
-    const result = await dbPool.query(
+    const [result] = await dbPool.query(
       'DELETE FROM cart_items WHERE id = ? AND user_id = ?',
       [itemId, userId]
     );

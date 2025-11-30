@@ -86,21 +86,21 @@ app.post('/auth/register', async (req, res) => {
 
   try {
     // Verificar se email já existe
-    const existing = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
+    const [existing] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
     if (existing.length > 0) {
       return res.status(400).json({ error: 'Email já cadastrado' });
     }
 
     // Verificar se CPF já existe
     const cpfLimpo = cpf.replace(/\D/g, '');
-    const existingCpf = await pool.query('SELECT id FROM users WHERE cpf = ?', [cpfLimpo]);
+    const [existingCpf] = await pool.query('SELECT id FROM users WHERE cpf = ?', [cpfLimpo]);
     if (existingCpf.length > 0) {
       return res.status(400).json({ error: 'CPF já cadastrado' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await pool.query(
+    const [result] = await pool.query(
       `INSERT INTO users (
         name, email, password, role, cpf, telefone, data_nascimento, 
         cep, endereco, numero, complemento, bairro, cidade, estado
@@ -137,7 +137,7 @@ app.post('/auth/login', async (req, res) => {
 
   try {
     console.log('📊 Executando query para buscar usuário...');
-    const users = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+    const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     console.log('✅ Query executada, usuários encontrados:', users.length);
 
     if (users.length === 0) {
@@ -185,7 +185,7 @@ app.post('/auth/login', async (req, res) => {
 // Buscar dados do usuário autenticado
 app.get('/auth/me', authenticateToken, async (req, res) => {
   try {
-    const users = await pool.query(
+    const [users] = await pool.query(
       'SELECT id, name, email, role FROM users WHERE id = ?',
       [req.user.id]
     );
@@ -206,7 +206,7 @@ app.get('/auth/me', authenticateToken, async (req, res) => {
 // Listar todos os usuários (Admin apenas)
 app.get('/users', authenticateToken, isAdmin, async (req, res) => {
   try {
-    const users = await pool.query(
+    const [users] = await pool.query(
       'SELECT id, name, email, role, created_at, cpf, telefone, data_nascimento, cep, endereco, numero, complemento, bairro, cidade, estado FROM users ORDER BY created_at DESC'
     );
 
@@ -228,7 +228,7 @@ app.delete('/users/:id', authenticateToken, isAdmin, async (req, res) => {
     }
 
     // Verificar se o usuário existe
-    const users = await pool.query('SELECT id FROM users WHERE id = ?', [userId]);
+    const [users] = await pool.query('SELECT id FROM users WHERE id = ?', [userId]);
     
     if (users.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -258,7 +258,7 @@ app.post('/products', authenticateToken, isAdmin, async (req, res) => {
   }
 
   try {
-    const result = await pool.query(
+    const [result] = await pool.query(
       `INSERT INTO products (name, description, price, category, stock, image_url, is_active)
        VALUES (?, ?, ?, ?, ?, ?, ?)
        RETURNING id`,
@@ -292,7 +292,7 @@ app.put('/products/:id', authenticateToken, isAdmin, async (req, res) => {
   const { name, description, price, category, stock, image_url, is_active } = req.body;
 
   try {
-    const result = await pool.query(
+    const [result] = await pool.query(
       `UPDATE products 
        SET name = ?, description = ?, price = ?, category = ?, 
            stock = ?, image_url = ?, is_active = ?
@@ -342,7 +342,7 @@ app.patch('/products/:id/toggle-active', authenticateToken, isAdmin, async (req,
   const { id } = req.params;
 
   try {
-    const products = await pool.query('SELECT is_active FROM products WHERE id = ?', [id]);
+    const [products] = await pool.query('SELECT is_active FROM products WHERE id = ?', [id]);
     
     if (products.length === 0) {
       return res.status(404).json({ error: 'Produto não encontrado' });
@@ -414,7 +414,7 @@ app.use('/orders', authenticateToken, orderRoutes);
 // Listar todos os pedidos (Admin apenas)
 app.get('/admin/orders', authenticateToken, isAdmin, async (req, res) => {
   try {
-    const orders = await pool.query(
+    const [orders] = await pool.query(
       `SELECT o.*, u.name as user_name, u.email as user_email, u.telefone as user_phone
        FROM orders o
        JOIN users u ON o.user_id = u.id
@@ -423,7 +423,7 @@ app.get('/admin/orders', authenticateToken, isAdmin, async (req, res) => {
 
     // Buscar itens de cada pedido
     for (let order of orders) {
-      const items = await pool.query(
+      const [items] = await pool.query(
         `SELECT * FROM order_items WHERE order_id = ?`,
         [order.id]
       );
@@ -568,7 +568,7 @@ app.get('/admin/reports/sales', authenticateToken, isAdmin, async (req, res) => 
 // Contagem de novos pedidos pendentes (Admin apenas)
 app.get('/admin/orders/pending/count', authenticateToken, isAdmin, async (req, res) => {
   try {
-    const result = await pool.query(
+    const [result] = await pool.query(
       `SELECT COUNT(*) as count FROM orders WHERE status = 'pendente'`
     );
 
