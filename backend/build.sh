@@ -6,8 +6,9 @@ echo "🚀 Iniciando deploy do backend..."
 echo "📦 Instalando dependências..."
 npm install
 
-# Executar migrações via Node.js (funciona melhor com SSL)
-echo "🗄️ Executando migrações..."
-npm run migrate || echo "⚠️ Algumas migrações podem já estar aplicadas"
+# Migrações foram executadas manualmente via psql
+# O banco de dados já está configurado e pronto
+echo "✅ Dependências instaladas!"
+echo "📊 Banco de dados já configurado manualmente"
 
 echo "✅ Build completo!"
