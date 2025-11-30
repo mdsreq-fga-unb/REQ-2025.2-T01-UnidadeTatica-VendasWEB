@@ -12,7 +12,7 @@ if (DB_TYPE === 'postgres') {
   // PostgreSQL (Render)
   console.log('🐘 Conectando ao PostgreSQL...');
   
-  pool = new Pool({
+  const pgPool = new Pool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
@@ -23,12 +23,24 @@ if (DB_TYPE === 'postgres') {
   });
 
   // Adapter para manter interface compatível com mysql2
-  pool.query = async (...args) => {
-    const result = await pool.query(...args);
-    return [result.rows, result.fields];
+  pool = {
+    query: async (sql, params) => {
+      // Converter placeholders MySQL (?) para PostgreSQL ($1, $2, etc)
+      let paramIndex = 1;
+      const pgSql = sql.replace(/\?/g, () => `$${paramIndex++}`);
+      
+      const result = await pgPool.query(pgSql, params);
+      return [result.rows, result.fields];
+    },
+    execute: async (sql, params) => {
+      let paramIndex = 1;
+      const pgSql = sql.replace(/\?/g, () => `$${paramIndex++}`);
+      
+      const result = await pgPool.query(pgSql, params);
+      return [result.rows, result.fields];
+    },
+    end: () => pgPool.end()
   };
-
-  pool.execute = pool.query;
 
 } else {
   // MySQL (Local/Docker)
