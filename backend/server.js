@@ -170,30 +170,42 @@ app.post('/auth/register', async (req, res) => {
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
 
+  console.log('🔐 Tentativa de login:', { email });
+
   if (!email || !password) {
     return res.status(400).json({ error: 'Email e senha são obrigatórios' });
   }
 
   try {
+    console.log('📊 Executando query para buscar usuário...');
     const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+    console.log('✅ Query executada, usuários encontrados:', users.length);
 
     if (users.length === 0) {
+      console.log('❌ Nenhum usuário encontrado com email:', email);
       return res.status(401).json({ error: 'Credenciais inválidas' });
     }
 
     const user = users[0];
+    console.log('👤 Usuário encontrado:', { id: user.id, email: user.email, role: user.role });
 
+    console.log('🔑 Verificando senha...');
     const validPassword = await bcrypt.compare(password, user.password);
+    console.log('✅ Senha válida?', validPassword);
+    
     if (!validPassword) {
+      console.log('❌ Senha inválida');
       return res.status(401).json({ error: 'Credenciais inválidas' });
     }
 
+    console.log('🎫 Gerando token JWT...');
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       JWT_SECRET,
       { expiresIn: '24h' }
     );
 
+    console.log('✅ Login bem-sucedido para:', email);
     res.json({
       message: 'Login realizado com sucesso',
       token,
@@ -205,8 +217,9 @@ app.post('/auth/login', async (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro ao fazer login' });
+    console.error('❌ ERRO NO LOGIN:', err.message);
+    console.error('Stack trace:', err.stack);
+    res.status(500).json({ error: 'Erro ao fazer login', details: err.message });
   }
 });
 
