@@ -5,7 +5,7 @@ async function emailExiste(email) {//veridica se ja existe um cliente com o emai
         "SELECT id FROM cliente WHERE email = ?",
         [email]
     );
-    return rows.length > 0;//retorna truen se o array que db.query retorna tiver tamanho != 0
+    return rows.length > 0;//retorna true se o array que db.query retorna tiver tamanho != 0
 }
 
 async function inserirCliente(cliente) {
