@@ -43,6 +43,12 @@ services:
           property: port
       - key: JWT_SECRET
         generateValue: true
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
       - key: CORS_ORIGIN
         sync: false
       - key: FRONTEND_URL

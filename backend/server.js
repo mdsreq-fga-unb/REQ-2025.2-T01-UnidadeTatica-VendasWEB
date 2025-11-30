@@ -10,64 +10,20 @@ dotenv.config({ path: '.env', override: true });
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import multer from 'multer';
 import fs from 'fs';
 import app from './src/app.js';
 import { pool } from './src/db.js';
 import productRoutes, { setPool } from './src/routes/productRoutes.js';
 import cartRoutes, { setPool as setCartPool } from './src/routes/cartRoutes.js';
 import orderRoutes, { setPool as setOrderPool } from './src/routes/orderRoutes.js';
+import { upload } from './src/config/cloudinary.js';
 
 // Debug ENV
 console.log("DEBUG ENV → DB_HOST:", process.env.DB_HOST);
 console.log("DEBUG ENV → DB_USER:", process.env.DB_USER);
 console.log("DEBUG ENV → DB_PASS:", process.env.DB_PASS);
 console.log("DEBUG ENV → DB_NAME:", process.env.DB_NAME);
-
-// Obter __dirname em ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Servir arquivos estáticos da pasta public/uploads
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-
-// Configuração do Multer para upload de imagens
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, 'public/uploads');
-    // Criar pasta se não existir
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
-    }
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    // Gerar nome único: timestamp-random-originalname
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    const name = path.basename(file.originalname, ext);
-    cb(null, `${name}-${uniqueSuffix}${ext}`);
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // Limite de 5MB
-  },
-  fileFilter: (req, file, cb) => {
-    // Aceitar apenas imagens
-    const allowedTypes = /jpeg|jpg|png|gif|webp/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error('Apenas imagens são permitidas (jpeg, jpg, png, gif, webp)'));
-    }
-  }
-});
+console.log("DEBUG ENV → CLOUDINARY:", process.env.CLOUDINARY_CLOUD_NAME ? '✅ Configurado' : '❌ Não configurado');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'unidade-tatica-secret-key-2025';
 
@@ -392,22 +348,23 @@ app.patch('/products/:id/toggle-active', authenticateToken, isAdmin, async (req,
   }
 });
 
-// Upload de imagem de produto (Admin apenas)
+// Upload de imagem de produto (Admin apenas) - Cloudinary
 app.post('/api/upload', authenticateToken, isAdmin, upload.single('image'), (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
 
-    const imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
+    console.log('📸 Imagem enviada para Cloudinary:', req.file.path);
     
+    // O Cloudinary retorna a URL em req.file.path
     res.json({
       message: 'Imagem enviada com sucesso',
-      imageUrl: imageUrl,
+      imageUrl: req.file.path, // URL do Cloudinary
       filename: req.file.filename
     });
   } catch (err) {
-    console.error(err);
+    console.error('❌ Erro no upload:', err);
     res.status(500).json({ error: 'Erro ao fazer upload da imagem' });
   }
 });
