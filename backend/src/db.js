@@ -26,13 +26,8 @@ if (DB_TYPE === 'postgres') {
 
   // Tratamento de erros do pool
   pgPool.on('error', (err) => {
-    console.error('❌ Erro inesperado no pool PostgreSQL:', err);
+    console.error('❌ Erro inesperado no pool PostgreSQL:', err.message);
   });
-
-  // Testar conexão
-  pgPool.query('SELECT NOW()')
-    .then(() => console.log('✅ Conexão PostgreSQL estabelecida'))
-    .catch(err => console.error('❌ Erro ao conectar no PostgreSQL:', err.message));
 
   // Adapter para manter interface compatível com mysql2
   pool = {
@@ -44,6 +39,7 @@ if (DB_TYPE === 'postgres') {
         
         console.log('🔍 SQL:', pgSql, 'Params:', params);
         const result = await pgPool.query(pgSql, params);
+        console.log('✅ Query executada, linhas retornadas:', result.rows.length);
         return [result.rows, result.fields];
       } catch (error) {
         console.error('❌ Erro na query:', error.message);
