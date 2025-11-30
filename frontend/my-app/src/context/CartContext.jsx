@@ -26,7 +26,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:4000/cart', {
+      const response = await fetch(`${API_URL}/cart`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/cart', {
+      const response = await fetch(`${API_URL}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return false;
 
     try {
-      const response = await fetch(`http://localhost:4000/cart/${itemId}`, {
+      const response = await fetch(`${API_URL}/cart/${itemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return false;
 
     try {
-      const response = await fetch(`http://localhost:4000/cart/${itemId}`, {
+      const response = await fetch(`${API_URL}/cart/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -156,7 +156,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return false;
 
     try {
-      const response = await fetch('http://localhost:4000/cart', {
+      const response = await fetch(`${API_URL}/cart`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
