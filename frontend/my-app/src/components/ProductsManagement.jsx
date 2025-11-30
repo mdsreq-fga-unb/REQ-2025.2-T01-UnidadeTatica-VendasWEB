@@ -17,6 +17,9 @@ const ProductsManagement = () => {
     image_url: '',
     is_active: true
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const categories = [
     { value: 'geral', label: 'Geral' },
@@ -52,8 +55,78 @@ const ProductsManagement = () => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validar tipo de arquivo
+      if (!file.type.startsWith('image/')) {
+        alert('Por favor, selecione apenas arquivos de imagem');
+        return;
+      }
+
+      // Validar tamanho (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('A imagem deve ter no máximo 5MB');
+        return;
+      }
+
+      setImageFile(file);
+      
+      // Criar preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async () => {
+    if (!imageFile) return null;
+
+    setUploadingImage(true);
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch('http://localhost:4000/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.imageUrl;
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Erro ao fazer upload da imagem');
+        return null;
+      }
+    } catch (error) {
+      console.error('Erro ao fazer upload:', error);
+      alert('Erro ao fazer upload da imagem');
+      return null;
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Fazer upload da imagem se houver arquivo selecionado
+    let imageUrl = formData.image_url;
+    if (imageFile) {
+      const uploadedUrl = await uploadImage();
+      if (uploadedUrl) {
+        imageUrl = uploadedUrl;
+      } else {
+        return; // Abortar se o upload falhar
+      }
+    }
 
     const url = editingProduct
       ? `http://localhost:4000/products/${editingProduct.id}`
@@ -70,6 +143,7 @@ const ProductsManagement = () => {
         },
         body: JSON.stringify({
           ...formData,
+          image_url: imageUrl,
           price: parseFloat(formData.price),
           stock: parseInt(formData.stock)
         })
@@ -145,6 +219,8 @@ const ProductsManagement = () => {
   const closeModal = () => {
     setShowModal(false);
     setEditingProduct(null);
+    setImageFile(null);
+    setImagePreview(null);
     setFormData({
       name: '',
       description: '',
@@ -281,14 +357,46 @@ const ProductsManagement = () => {
               </div>
 
               <div className="form-group">
-                <label>URL da Imagem</label>
-                <input
-                  type="url"
-                  name="image_url"
-                  value={formData.image_url}
-                  onChange={handleInputChange}
-                  placeholder="https://exemplo.com/imagem.jpg"
-                />
+                <label>Imagem do Produto</label>
+                <div className="image-upload-section">
+                  <div className="upload-option">
+                    <label className="file-input-label">
+                      📁 Escolher Arquivo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                    {imageFile && <span className="file-name">✅ {imageFile.name}</span>}
+                  </div>
+                  
+                  <div className="upload-divider">
+                    <span>OU</span>
+                  </div>
+                  
+                  <input
+                    type="url"
+                    name="image_url"
+                    value={formData.image_url}
+                    onChange={handleInputChange}
+                    placeholder="Cole a URL da imagem aqui"
+                    className="url-input"
+                  />
+                </div>
+
+                {(imagePreview || formData.image_url) && (
+                  <div className="image-preview">
+                    <img 
+                      src={imagePreview || formData.image_url} 
+                      alt="Preview" 
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/150x150?text=Erro+ao+carregar';
+                      }}
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="form-group-checkbox">
@@ -307,8 +415,8 @@ const ProductsManagement = () => {
                 <button type="button" className="btn-cancel" onClick={closeModal}>
                   Cancelar
                 </button>
-                <button type="submit" className="btn-save">
-                  {editingProduct ? 'Atualizar' : 'Criar'} Produto
+                <button type="submit" className="btn-save" disabled={uploadingImage}>
+                  {uploadingImage ? '⏳ Enviando...' : (editingProduct ? 'Atualizar' : 'Criar')} Produto
                 </button>
               </div>
             </form>

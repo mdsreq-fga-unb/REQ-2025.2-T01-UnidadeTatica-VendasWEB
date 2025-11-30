@@ -141,6 +141,25 @@ app.post('/auth/login', async (req, res) => {
   }
 });
 
+// Buscar dados do usuário autenticado
+app.get('/auth/me', authenticateToken, async (req, res) => {
+  try {
+    const [users] = await pool.query(
+      'SELECT id, name, email, role FROM users WHERE id = ?',
+      [req.user.id]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    res.json(users[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar dados do usuário' });
+  }
+});
+
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

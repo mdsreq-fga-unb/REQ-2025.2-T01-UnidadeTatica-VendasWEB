@@ -339,6 +339,122 @@
   border-top: 1px solid #d4d1cf;
 }
 
+/* Image Upload Section */
+.image-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 2px dashed #d4d1cf;
+}
+
+.upload-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #151203;
+  color: #d4d1cf;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+  background-color: #8b7d6b;
+  transform: scale(1.05);
+}
+
+.file-name {
+  color: #151203;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
+.upload-divider {
+  text-align: center;
+  position: relative;
+  margin: 10px 0;
+}
+
+.upload-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #d4d1cf;
+}
+
+.upload-divider::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #d4d1cf;
+}
+
+.upload-divider span {
+  background-color: #f9f9f9;
+  padding: 0 10px;
+  color: #605C5C;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.url-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d4d1cf;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
+.url-input:focus {
+  outline: none;
+  border-color: #151203;
+  box-shadow: 0 0 0 2px rgba(21, 18, 3, 0.1);
+}
+
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #d4d1cf;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.btn-save:disabled {
+  background-color: #605C5C;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-save:disabled:hover {
+  transform: none;
+  background-color: #605C5C;
+}
+
 .btn-cancel,
 .btn-save {
   padding: 12px 30px;
