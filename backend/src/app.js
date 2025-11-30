@@ -10,6 +10,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
   'https://unidade-tatica-frontend.onrender.com',
+  'https://req-2025-2-t01-unidadetatica-vendasweb.onrender.com',
   process.env.CORS_ORIGIN,
   process.env.FRONTEND_URL
 ].filter(Boolean);
