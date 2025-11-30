@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import './Navbar.css';
 import logoUNDT from '../assets/logoUNDT.jpg';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { getTotalItems } = useCart();
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -59,10 +61,15 @@ const Navbar = () => {
         <div className="navbar-actions">
           {user ? (
             <>
-              <Link to="/carrinho" className="btn-cart" title="Carrinho de Compras">
-                🛒
-                <span className="cart-badge">0</span>
-              </Link>
+              {/* Carrinho apenas para usuários normais */}
+              {user.role !== 'admin' && (
+                <Link to="/carrinho" className="btn-cart" title="Carrinho de Compras">
+                  🛒
+                  {getTotalItems() > 0 && (
+                    <span className="cart-badge">{getTotalItems()}</span>
+                  )}
+                </Link>
+              )}
               
               <div className="user-menu-container">
                 <button 
@@ -79,9 +86,12 @@ const Navbar = () => {
                     <Link to="/perfil" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
                       <span>👤</span> Meu Perfil
                     </Link>
-                    <Link to="/meus-pedidos" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
-                      <span>📦</span> Meus Pedidos
-                    </Link>
+                    {/* Histórico de Pedidos apenas para usuários normais */}
+                    {user.role !== 'admin' && (
+                      <Link to="/meus-pedidos" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
+                        <span>📦</span> Histórico de Pedidos
+                      </Link>
+                    )}
                     {user.role === 'admin' && (
                       <Link to="/admin" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
                         <span>⚙️</span> Admin Panel

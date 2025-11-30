@@ -1,0 +1,71 @@
+services:
+  # MySQL Database
+  - type: pserv
+    name: unidade-tatica-db
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.mysql
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 1
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: meubanco
+
+  # Backend API
+  - type: web
+    name: unidade-tatica-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DB_HOST
+        fromService:
+          name: unidade-tatica-db
+          type: pserv
+          property: host
+      - key: DB_USER
+        value: root
+      - key: DB_PASS
+        fromService:
+          name: unidade-tatica-db
+          type: pserv
+          envVarKey: MYSQL_ROOT_PASSWORD
+      - key: DB_NAME
+        value: meubanco
+      - key: DB_PORT
+        value: 3306
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        fromService:
+          name: unidade-tatica-frontend
+          type: web
+          property: host
+
+  # Frontend
+  - type: web
+    name: unidade-tatica-frontend
+    env: static
+    plan: free
+    buildCommand: cd frontend/my-app && npm install && npm run build
+    staticPublishPath: ./frontend/my-app/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: unidade-tatica-backend
+          type: web
+          property: host

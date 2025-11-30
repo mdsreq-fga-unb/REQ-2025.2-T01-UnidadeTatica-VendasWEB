@@ -1,10 +1,15 @@
 import React from 'react';
+import { useCart } from '../context/CartContext';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const handleAddToCart = () => {
-    // Futura implementação do carrinho
-    alert(`${product.name} adicionado ao carrinho!`);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = async () => {
+    const success = await addToCart(product.id, 1);
+    if (success) {
+      alert(`${product.name} adicionado ao carrinho!`);
+    }
   };
 
   return (

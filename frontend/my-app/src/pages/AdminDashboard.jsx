@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ProductsManagement from '../components/ProductsManagement';
+import OrdersManagement from '../components/OrdersManagement';
+import ReportsManagement from '../components/ReportsManagement';
 import './css/AdminDashboard.css';
+import { API_URL } from '../config';
 
 const AdminDashboard = () => {
   const { user, logout, token } = useAuth();
@@ -17,7 +20,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:4000/users', {
+      const response = await fetch(`${API_URL}/users', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -31,6 +34,32 @@ const AdminDashboard = () => {
       console.error('Erro ao buscar usuários:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteUser = async (userId, userName) => {
+    if (!window.confirm(`Tem certeza que deseja excluir o usuário "${userName}"? Esta ação não pode ser desfeita.`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        alert('Usuário excluído com sucesso!');
+        fetchUsers(); // Recarregar lista
+      } else {
+        const data = await response.json();
+        alert(data.error || 'Erro ao excluir usuário');
+      }
+    } catch (error) {
+      console.error('Erro ao excluir usuário:', error);
+      alert('Erro ao excluir usuário');
     }
   };
 
@@ -60,10 +89,16 @@ const AdminDashboard = () => {
           >
             <span>📦</span> Produtos
           </button>
-          <button className="nav-item">
+          <button 
+            className={`nav-item ${activeSection === 'orders' ? 'active' : ''}`}
+            onClick={() => setActiveSection('orders')}
+          >
             <span>🛒</span> Pedidos
           </button>
-          <button className="nav-item">
+          <button 
+            className={`nav-item ${activeSection === 'reports' ? 'active' : ''}`}
+            onClick={() => setActiveSection('reports')}
+          >
             <span>📊</span> Relatórios
           </button>
           <button className="nav-item">
@@ -122,10 +157,11 @@ const AdminDashboard = () => {
                         </td>
                         <td>
                           <div className="action-buttons">
-                            <button className="btn-action btn-edit" title="Editar">
-                              ✏️
-                            </button>
-                            <button className="btn-action btn-delete" title="Excluir">
+                            <button 
+                              className="btn-action btn-delete" 
+                              title="Excluir"
+                              onClick={() => handleDeleteUser(u.id, u.name)}
+                            >
                               🗑️
                             </button>
                           </div>
@@ -158,6 +194,10 @@ const AdminDashboard = () => {
           </>
         ) : activeSection === 'products' ? (
           <ProductsManagement />
+        ) : activeSection === 'orders' ? (
+          <OrdersManagement />
+        ) : activeSection === 'reports' ? (
+          <ReportsManagement />
         ) : (
           <div className="coming-soon">
             <h2>🚧 Em Desenvolvimento</h2>

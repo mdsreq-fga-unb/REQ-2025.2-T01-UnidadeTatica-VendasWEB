@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
+import { API_URL } from '../config';
 import './css/CategoryPage.css';
 
 const CategoryPage = ({ category, title, description }) => {
@@ -18,8 +19,8 @@ const CategoryPage = ({ category, title, description }) => {
     
     try {
       const url = category 
-        ? `http://localhost:4000/products?category=${category}&active=true`
-        : `http://localhost:4000/products?active=true`;
+        ? `${API_URL}/products?category=${category}&active=true`
+        : `${API_URL}/products?active=true`;
         
       const response = await fetch(url);
       

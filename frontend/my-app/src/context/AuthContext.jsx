@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { API_URL } from '../config';
 
 const AuthContext = createContext(null);
 
@@ -18,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUserData = async () => {
     try {
       console.log('🔍 Buscando dados do usuário com token:', token);
-      const response = await fetch('http://localhost:4000/auth/me', {
+      const response = await fetch(`${API_URL}/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       console.log('🔐 Tentando login com:', email);
-      const response = await fetch('http://localhost:4000/auth/login', {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -72,14 +73,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (name, email, password) => {
+  const register = async (name, email, password, userData = {}) => {
     try {
-      const response = await fetch('http://localhost:4000/auth/register', {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          password,
+          cpf: userData.cpf,
+          telefone: userData.telefone,
+          dataNascimento: userData.dataNascimento,
+          cep: userData.cep,
+          endereco: userData.endereco,
+          numero: userData.numero,
+          complemento: userData.complemento,
+          bairro: userData.bairro,
+          cidade: userData.cidade,
+          estado: userData.estado
+        })
       });
 
       const data = await response.json();

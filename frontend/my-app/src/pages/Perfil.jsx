@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import './css/Perfil.css';
+import { API_URL } from '../config';
 
 const Perfil = () => {
   const { user, token } = useAuth();
@@ -43,7 +44,7 @@ const Perfil = () => {
         updateData.newPassword = formData.newPassword;
       }
 
-      const response = await fetch(`http://localhost:4000/users/${user.id}`, {
+      const response = await fetch(`${API_URL}/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

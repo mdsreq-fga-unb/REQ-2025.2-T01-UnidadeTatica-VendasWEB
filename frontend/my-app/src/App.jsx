@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import { AdminRoute, PrivateRoute } from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
 import AdminDashboard from './pages/AdminDashboard';
 import Geral from './pages/Geral';
 import Roupas from './pages/Roupas';
@@ -19,7 +21,8 @@ import MeusPedidos from './pages/MeusPedidos';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <CartProvider>
+        <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/geral" element={<Geral />} />
@@ -31,6 +34,7 @@ function App() {
           <Route path="/acessorios" element={<Acessorios />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/entrar" element={<Login />} />
+          <Route path="/cadastrar" element={<Cadastro />} />
           
           {/* Rotas Protegidas - Requerem Login */}
           <Route 
@@ -69,6 +73,7 @@ function App() {
           />
         </Routes>
       </Router>
+      </CartProvider>
     </AuthProvider>
   );
 }

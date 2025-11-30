@@ -1,0 +1,278 @@
+.reports-management {
+  padding: 20px;
+}
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.reports-header h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.reports-header p {
+  margin: 5px 0 0 0;
+  color: #7f8c8d;
+}
+
+.period-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.period-selector select {
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.period-selector select:hover {
+  border-color: #3498db;
+}
+
+.period-selector select:focus {
+  outline: none;
+  border-color: #2980b9;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.summary-card.revenue {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.summary-card.average {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.summary-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.summary-card .value {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.summary-card .subtitle {
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.report-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.report-card h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 1.2em;
+}
+
+.status-chart, .category-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-item, .category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.status-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-badge.status-pendente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-confirmado {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-enviado {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-badge.status-entregue {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.status-cancelado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-count {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+.status-revenue, .category-revenue {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.1em;
+}
+
+.products-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th {
+  background: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  color: #495057;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.products-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.products-table tr:hover {
+  background: #f8f9fa;
+}
+
+.category-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.category-info strong {
+  color: #2c3e50;
+  text-transform: capitalize;
+}
+
+.category-info span {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+.daily-sales {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.daily-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.daily-item:hover {
+  background: #f8f9fa;
+}
+
+.daily-date {
+  color: #495057;
+}
+
+.daily-orders {
+  color: #6c757d;
+  text-align: center;
+}
+
+.daily-revenue {
+  color: #2c3e50;
+  font-weight: bold;
+  text-align: right;
+}
+
+.empty {
+  text-align: center;
+  color: #6c757d;
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  .reports-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .daily-orders, .daily-revenue {
+    text-align: left;
+  }
+}

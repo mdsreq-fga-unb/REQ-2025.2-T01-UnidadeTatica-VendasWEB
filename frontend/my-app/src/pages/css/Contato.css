@@ -51,7 +51,14 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 1.8rem;
   color: #151203;
+  margin-bottom: 10px;
+}
+
+.info-subtitle {
+  color: #8b7d6b;
+  font-size: 0.95rem;
   margin-bottom: 30px;
+  font-style: italic;
 }
 
 .info-item {
@@ -78,13 +85,54 @@
   font-size: 1rem;
   font-weight: 700;
   color: #151203;
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
 }
 
 .info-item p {
   color: #605C5C;
-  margin: 0;
+  margin: 0 0 5px 0;
   line-height: 1.6;
+}
+
+.info-item .referencia {
+  color: #8b7d6b;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.info-item .closed {
+  color: #d9534f;
+  font-weight: 500;
+}
+
+.whatsapp-link,
+.email-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: #25d366;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.email-link {
+  background: #0066cc;
+}
+
+.whatsapp-link:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+}
+
+.email-link:hover {
+  background: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
 }
 
 /* Contato Form */

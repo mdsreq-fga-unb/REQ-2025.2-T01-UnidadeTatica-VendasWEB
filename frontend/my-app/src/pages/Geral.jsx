@@ -4,8 +4,8 @@ import CategoryPage from './CategoryPage';
 const Geral = () => {
   return (
     <CategoryPage 
-      category="geral"
-      title="Produtos Gerais"
+      category={null}
+      title="Todos os Produtos"
       description="Explore nossa linha completa de produtos táticos e equipamentos essenciais para todas as operações."
     />
   );

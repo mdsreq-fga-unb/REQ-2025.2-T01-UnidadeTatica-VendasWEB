@@ -1,0 +1,242 @@
+.orders-management {
+  padding: 20px;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.orders-header h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.orders-header p {
+  margin: 5px 0 0 0;
+  color: #7f8c8d;
+}
+
+.pending-alert {
+  background: #ff6b6b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.orders-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.stat-card p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.order-info h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.2em;
+}
+
+.order-date {
+  margin: 5px 0 0 0;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.status-badge.status-pendente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-confirmado {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-enviado {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-badge.status-entregue {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.status-cancelado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.order-customer {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.order-customer p {
+  margin: 5px 0;
+  color: #495057;
+}
+
+.order-items {
+  margin-bottom: 15px;
+}
+
+.order-items h4 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+  background: #f8f9fa;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.order-item span {
+  color: #495057;
+}
+
+.order-item .item-subtotal {
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: right;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 2px solid #ecf0f1;
+}
+
+.order-total {
+  font-size: 1.2em;
+  color: #2c3e50;
+}
+
+.order-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.status-select {
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.status-select:hover {
+  border-color: #3498db;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #2980b9;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  .orders-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .order-item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .order-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}

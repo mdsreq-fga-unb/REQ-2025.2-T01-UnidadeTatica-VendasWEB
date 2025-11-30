@@ -20,7 +20,28 @@ const Contato = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Mensagem enviada! Em breve entraremos em contato.');
+    
+    // Construir mensagem do WhatsApp
+    let mensagem = `📝 *CONTATO SAC - UNIDADE TÁTICA*\n\n`;
+    mensagem += `👤 *Nome:* ${formData.nome}\n`;
+    mensagem += `📧 *Email:* ${formData.email}\n`;
+    mensagem += `📞 *Telefone:* ${formData.telefone}\n`;
+    mensagem += `📋 *Assunto:* ${formData.assunto}\n\n`;
+    mensagem += `💬 *Mensagem:*\n${formData.mensagem}`;
+
+    // Codificar mensagem para URL
+    const mensagemCodificada = encodeURIComponent(mensagem);
+    
+    // Número do WhatsApp da loja
+    const numeroWhatsApp = '5561991427808';
+    
+    // Criar URL do WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+    
+    // Abrir WhatsApp em nova aba
+    window.open(urlWhatsApp, '_blank');
+    
+    // Limpar formulário
     setFormData({
       nome: '',
       email: '',
@@ -41,34 +62,56 @@ const Contato = () => {
 
         <div className="contato-content">
           <div className="contato-info">
-            <h2>🎖️ Unidade Tática</h2>
+            <h2>🎖️ Unidade Tática Militar</h2>
+            <p className="info-subtitle">Equipamentos e Acessórios Táticos de Qualidade</p>
+            
             <div className="info-item">
               <span className="icon">📍</span>
               <div>
                 <h3>Endereço</h3>
-                <p>Brasília - DF, Brasil</p>
+                <p>Quadra I, Conjunto I-9, Lote 05</p>
+                <p>Setor Militar - Planaltina/DF</p>
+                <p className="referencia">Em frente ao Posto Ipiranga</p>
               </div>
             </div>
+            
             <div className="info-item">
               <span className="icon">📞</span>
               <div>
-                <h3>Telefone</h3>
-                <p>(61) 9999-9999</p>
+                <h3>WhatsApp / Telefone</h3>
+                <p>(61) 99142-7808</p>
+                <a 
+                  href="https://wa.me/5561991427808" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="whatsapp-link"
+                >
+                  💬 Iniciar conversa no WhatsApp
+                </a>
               </div>
             </div>
+            
             <div className="info-item">
               <span className="icon">📧</span>
               <div>
                 <h3>Email</h3>
-                <p>contato@unidadetatica.com</p>
+                <p>unidadetaticamilitaria@gmail.com</p>
+                <a 
+                  href="mailto:unidadetaticamilitaria@gmail.com"
+                  className="email-link"
+                >
+                  ✉️ Enviar email
+                </a>
               </div>
             </div>
+            
             <div className="info-item">
               <span className="icon">⏰</span>
               <div>
                 <h3>Horário de Atendimento</h3>
-                <p>Segunda a Sexta: 9h às 18h</p>
-                <p>Sábado: 9h às 13h</p>
+                <p><strong>Segunda a Sexta:</strong> 9h às 18h</p>
+                <p><strong>Sábado:</strong> 9h às 13h</p>
+                <p className="closed">Domingo e Feriados: Fechado</p>
               </div>
             </div>
           </div>
