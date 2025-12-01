@@ -1,7 +1,7 @@
 # Ata da Reunião
 - Sprint 0
 
-**Data:** 10/09/2005
+**Data:** 10/09/2025
 **Local:** Teams
 **Presentes:** 
 - Daniel Martins
