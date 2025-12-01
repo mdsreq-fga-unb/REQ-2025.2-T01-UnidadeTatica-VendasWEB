@@ -79,11 +79,6 @@ const Login = () => {
               <a href="/cadastrar" className="link-cadastro">Cadastre-se</a>
             </p>
           </div>
-
-          <div className="test-credentials">
-            <p><strong>Credenciais de teste:</strong></p>
-            <p>🎖️ Admin: admin / senha123</p>
-          </div>
         </form>
       </div>
     </div>
