@@ -1787,13 +1787,222 @@
     </div>
 
     <div id="ER" class="tab-content bg-white p-6 rounded-xl shadow-lg">
-      <h2 class="text-2xl font-bold mb-4">Evidencias de ER</h2>
+  <section id="ER" class="max-w-5xl mx-auto px-6 py-8 space-y-10">
+    <h2 class="text-2xl font-bold mb-4">Evidências de Engenharia de Requisitos</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Nesta seção estão reunidas as principais evidências produzidas durante a Engenharia de Requisitos
+      do projeto da <strong>Unidade Tática</strong>.
+    </p>
 
+    <!-- 1. Lista de Stakeholders -->
+    <div class="bg-slate-50 p-6 rounded-xl shadow-sm space-y-4">
+      <h3 class="text-xl font-semibold text-slate-900">1. Lista de Stakeholders</h3>
+      <p class="text-slate-600">
+        A tabela a seguir apresenta os principais stakeholders identificados para o projeto.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-200 text-sm text-slate-700">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border border-gray-200 px-4 py-2 text-left">Stakeholder</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Papel</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Interesse no Sistema</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Canal de Contato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">Dono da Unidade Tática</td>
+              <td class="border border-gray-200 px-4 py-2">Cliente principal</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Aumentar vendas on-line, integrar estoque físico e digital e acompanhar relatórios.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Reuniões semanais / WhatsApp</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">Equipe de Desenvolvimento</td>
+              <td class="border border-gray-200 px-4 py-2">Implementação do sistema</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Receber requisitos claros, validar escopo e ter feedback contínuo do cliente.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Teams / WhatsApp / GitHub</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">Clientes Finais</td>
+              <td class="border border-gray-200 px-4 py-2">Usuários da plataforma</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Realizar compras com segurança, rapidez e transparência no acompanhamento dos pedidos.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Plataforma web / Instagram / WhatsApp</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">Equipe Operacional da Loja</td>
+              <td class="border border-gray-200 px-4 py-2">Controle de estoque e expedição</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Manter estoque atualizado, preparar pedidos e garantir entrega dentro dos prazos combinados.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Sistema interno / WhatsApp</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2. Lista de Requisitos -->
+    <div class="bg-slate-50 p-6 rounded-xl shadow-sm space-y-4">
+      <h3 class="text-xl font-semibold text-slate-900">2. Lista de Requisitos</h3>
+      <p class="text-slate-600">
+        A lista completa de requisitos funcionais e não funcionais está detalhada na
+        <strong>Seção 7 - Requisitos de Software</strong>. Abaixo, um resumo dos principais requisitos
+        do MVP como evidência.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-200 text-sm text-slate-700">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border border-gray-200 px-4 py-2 text-left">Código</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Tipo</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Descrição Resumida</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF01</td>
+              <td class="border border-gray-200 px-4 py-2">Funcional</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Permitir o cadastro de produtos no catálogo da loja.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Alta</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF05</td>
+              <td class="border border-gray-200 px-4 py-2">Funcional</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Permitir ao cliente visualizar o carrinho de compras.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Alta</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF09</td>
+              <td class="border border-gray-200 px-4 py-2">Funcional</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Permitir cadastro de clientes na plataforma.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Alta</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RNF01</td>
+              <td class="border border-gray-200 px-4 py-2">Não Funcional</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Sistema responsivo para desktop, tablet e smartphone.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Alta</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RNF05</td>
+              <td class="border border-gray-200 px-4 py-2">Não Funcional</td>
+              <td class="border border-gray-200 px-4 py-2">
+                Armazenar senhas com hashing criptográfico seguro.
+              </td>
+              <td class="border border-gray-200 px-4 py-2">Alta</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
 
+    <!-- 3. Protótipo simples -->
+    <div class="bg-slate-50 p-6 rounded-xl shadow-sm space-y-4">
+      <h3 class="text-xl font-semibold text-slate-900">3. Protótipo Simples</h3>
+      <p class="text-slate-600">
+        O protótipo de baixa fidelidade foi utilizado para validar o fluxo principal de navegação e
+        as telas essenciais do e-commerce.
+      </p>
+
+      <div class="bg-white border border-dashed border-slate-300 rounded-lg p-4 text-center">
+        <p class="text-sm text-slate-500 mb-3">
+          Substitua a imagem abaixo pelo print do seu protótipo ou link externo (Figma, Miro, etc.).
+        </p>
+        <img
+          src="images/prototipo-unidade-tatica.png"
+          alt="Protótipo simples do e-commerce Unidade Tática"
+          class="mx-auto rounded-lg shadow-sm"
+        />
+
+      </div>
+    </div>
+
+    <!-- 4. Tabela de priorização de requisitos -->
+    <div class="bg-slate-50 p-6 rounded-xl shadow-sm space-y-4">
+      <h3 class="text-xl font-semibold text-slate-900">4. Tabela de Priorização de Requisitos</h3>
+      <p class="text-slate-600">
+        A priorização foi realizada com base na técnica <strong>MoSCoW</strong> e em critérios de
+        valor de negócio e esforço técnico. A tabela abaixo traz um recorte das principais
+        funcionalidades consideradas para o MVP.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border border-gray-200 text-sm text-slate-700">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border border-gray-200 px-4 py-2 text-left">Código RF</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Requisito</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">MoSCoW</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">Pontuação Técnica</th>
+              <th class="border border-gray-200 px-4 py-2 text-left">No MVP?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF01</td>
+              <td class="border border-gray-200 px-4 py-2">Cadastrar produto</td>
+              <td class="border border-gray-200 px-4 py-2">Should Have</td>
+              <td class="border border-gray-200 px-4 py-2">3</td>
+              <td class="border border-gray-200 px-4 py-2">Sim</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF03</td>
+              <td class="border border-gray-200 px-4 py-2">Excluir produtos</td>
+              <td class="border border-gray-200 px-4 py-2">Must Have</td>
+              <td class="border border-gray-200 px-4 py-2">2</td>
+              <td class="border border-gray-200 px-4 py-2">Sim</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF06</td>
+              <td class="border border-gray-200 px-4 py-2">Adicionar item ao carrinho</td>
+              <td class="border border-gray-200 px-4 py-2">Must Have</td>
+              <td class="border border-gray-200 px-4 py-2">3</td>
+              <td class="border border-gray-200 px-4 py-2">Sim</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF10</td>
+              <td class="border border-gray-200 px-4 py-2">Login do cliente</td>
+              <td class="border border-gray-200 px-4 py-2">Should Have</td>
+              <td class="border border-gray-200 px-4 py-2">3</td>
+              <td class="border border-gray-200 px-4 py-2">Sim</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-200 px-4 py-2">RF12</td>
+              <td class="border border-gray-200 px-4 py-2">Pagamento via Pix</td>
+              <td class="border border-gray-200 px-4 py-2">Won't Have</td>
+              <td class="border border-gray-200 px-4 py-2">4</td>
+              <td class="border border-gray-200 px-4 py-2">Não</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
     <div id="ESW" class="tab-content bg-white p-6 rounded-xl shadow-lg">
-      <h2 class="text-2xl font-bold mb-4">Evidencias de ESW</h2>
+      <h2 class="text-2xl font-bold mb-4">Evidências de ESW</h2>
 
 
     </div>
