@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
@@ -7,8 +7,9 @@ import './css/Carrinho.css';
 import { API_URL } from '../config';
 
 const Carrinho = () => {
-  const { cartItems, loading, updateQuantity, removeFromCart, calculateTotal } = useCart();
+  const { cartItems, loading, updateQuantity, removeFromCart, calculateTotal, refreshCart } = useCart();
   const { user, token } = useAuth();
+  const navigate = useNavigate();
 
   const generateOrderId = () => {
     const timestamp = Date.now();
@@ -84,9 +85,12 @@ const Carrinho = () => {
       // Abrir WhatsApp em nova aba
       window.open(urlWhatsApp, '_blank');
       
-      // Recarregar página após 1 segundo (carrinho será limpo automaticamente pelo backend)
-      setTimeout(() => {
-        window.location.reload();
+      // Atualizar carrinho após criar pedido (backend já limpou o carrinho)
+      setTimeout(async () => {
+        await refreshCart();
+        alert('Pedido enviado! Seu carrinho foi limpo.');
+        // Redirecionar para página de pedidos
+        navigate('/meus-pedidos');
       }, 1000);
       
     } catch (error) {
