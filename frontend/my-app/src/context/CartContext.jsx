@@ -129,6 +129,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return false;
 
     try {
+      console.log('🗑️ Removendo item do carrinho:', itemId);
       const response = await fetch(`${API_URL}/cart/${itemId}`, {
         method: 'DELETE',
         headers: {
@@ -136,16 +137,21 @@ export const CartProvider = ({ children }) => {
         }
       });
 
+      console.log('📡 Resposta da remoção:', response.status);
+
       if (response.ok) {
         // Recarregar carrinho
         await fetchCart();
+        console.log('✅ Item removido com sucesso');
         return true;
       } else {
-        alert('Erro ao remover item do carrinho');
+        const errorData = await response.json();
+        console.error('❌ Erro ao remover:', errorData);
+        alert(errorData.error || 'Erro ao remover item do carrinho');
         return false;
       }
     } catch (error) {
-      console.error('Erro ao remover item:', error);
+      console.error('❌ Erro ao remover item:', error);
       alert('Erro ao remover item do carrinho');
       return false;
     }

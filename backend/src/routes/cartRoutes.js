@@ -144,7 +144,7 @@ router.delete('/:id', async (req, res) => {
     const itemId = req.params.id;
     
     const [result] = await dbPool.query(
-      'DELETE FROM cart_items WHERE id = ? AND user_id = ?',
+      'DELETE FROM cart_items WHERE id = ? AND user_id = ? RETURNING id',
       [itemId, userId]
     );
     
