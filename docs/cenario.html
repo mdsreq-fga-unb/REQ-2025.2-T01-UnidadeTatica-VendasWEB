@@ -66,6 +66,7 @@
             Software</button></li>
         <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="dorDoD">8. Dor e DoD</button></li>
         <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="backlog">9. Backlog de Produto</button></li>
+        <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="EC">Estudos de caso</button></li>
         <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="ER">Evidências de ER</button></li>
         <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="ESW">Evidências de ESW</button></li>
         <li><button class="tab-btn px-4 py-2 hover:text-blue-600" data-tab="licoes">10. Lições Aprendidas</button></li>
@@ -1786,6 +1787,12 @@
 
     </div>
 
+    <div id="EC" class="tab-content bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">Estudos de Caso</h2>
+
+
+    </div>
+
     <div id="ER" class="tab-content bg-white p-6 rounded-xl shadow-lg">
   <section id="ER" class="max-w-5xl mx-auto px-6 py-8 space-y-10">
     <h2 class="text-2xl font-bold mb-4">Evidências de Engenharia de Requisitos</h2>
@@ -2053,8 +2060,91 @@
     <div id="ESW" class="tab-content bg-white p-6 rounded-xl shadow-lg">
       <h2 class="text-2xl font-bold mb-4">Evidências de ESW</h2>
 
+      <div class="space-y-6">
 
+        <!-- 1. Print do Docker rodando -->
+        <section class="border rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-2">Print do Docker rodando</h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Evidência do ambiente de desenvolvimento/containerização da aplicação em execução via Docker.
+          </p>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[150px]">
+            <!-- Substitua o src abaixo pela imagem correspondente -->
+            <img
+              src="images/docker-rodando.png"
+              alt="Print do Docker rodando a aplicação"
+              class="max-w-full h-auto"
+            >
+          </div>
+        </section>
+
+        <!-- 2. Print do deploy de backend -->
+        <section class="border rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-2">Print do deploy do backend</h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Evidência do processo de deploy do backend da plataforma em ambiente de produção.
+          </p>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[150px]">
+            <!-- Substitua o src abaixo pela imagem correspondente -->
+            <img
+              src="images/deploy-backend.png"
+              alt="Print do deploy do backend em produção"
+              class="max-w-full h-auto"
+            >
+          </div>
+        </section>
+
+        <!-- 3. Logs de requisição do backend em produção -->
+        <section class="border rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-2">Logs de requisição do backend (produção)</h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Logs de requisições ao backend em produção, demonstrando monitoramento e rastreabilidade.
+          </p>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[150px]">
+            <!-- Substitua o src abaixo pela imagem correspondente -->
+            <img
+              src="images/logs-backend-producao.png"
+              alt="Logs de requisição do backend em produção"
+              class="max-w-full h-auto"
+            >
+          </div>
+        </section>
+
+        <!-- 4. Logs de deploy do front no Render -->
+        <section class="border rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-2">Logs de deploy do frontend no Render</h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Evidência do pipeline de deploy do frontend, com registros gerados pela plataforma Render.
+          </p>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[150px]">
+            <!-- Substitua o src abaixo pela imagem correspondente -->
+            <img
+              src="images/logs-deploy-front-render.png"
+              alt="Logs de deploy do frontend na Render"
+              class="max-w-full h-auto"
+            >
+          </div>
+        </section>
+
+        <!-- 5. Status do deploy da plataforma no Render -->
+        <section class="border rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-2">Status do deploy da plataforma no Render</h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Tela de status/saúde dos serviços da plataforma (frontend/backend) na Render.
+          </p>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[150px]">
+            <!-- Substitua o src abaixo pela imagem correspondente -->
+            <img
+              src="images/status-deploy-render.png"
+              alt="Status do deploy da plataforma no Render"
+              class="max-w-full h-auto"
+            >
+          </div>
+        </section>
+
+      </div>
     </div>
+
 
     <div id="licoes" class="tab-content bg-white p-6 rounded-xl shadow-lg">
       <p class="text-slate-600 leading-relaxed"><!-- Seção 6 -->
