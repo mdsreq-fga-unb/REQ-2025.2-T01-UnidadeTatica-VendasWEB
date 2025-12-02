@@ -75,8 +75,8 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ error: 'Estoque insuficiente para esta quantidade' });
       }
       
-      await dbPool.query(
-        'UPDATE cart_items SET quantity = ? WHERE id = ?',
+      const [updateResult] = await dbPool.query(
+        'UPDATE cart_items SET quantity = ? WHERE id = ? RETURNING id',
         [newQuantity, existingItems[0].id]
       );
       
@@ -125,10 +125,14 @@ router.put('/:id', async (req, res) => {
       return res.status(400).json({ error: 'Estoque insuficiente' });
     }
     
-    await dbPool.query(
-      'UPDATE cart_items SET quantity = ? WHERE id = ?',
+    const [updateResult] = await dbPool.query(
+      'UPDATE cart_items SET quantity = ? WHERE id = ? RETURNING id',
       [quantity, itemId]
     );
+    
+    if (!updateResult || updateResult.length === 0) {
+      return res.status(404).json({ error: 'Erro ao atualizar quantidade' });
+    }
     
     res.json({ message: 'Quantidade atualizada' });
   } catch (error) {

@@ -235,7 +235,11 @@ app.delete('/users/:id', authenticateToken, isAdmin, async (req, res) => {
     }
 
     // Deletar o usuário (cascade vai deletar pedidos e itens relacionados)
-    await pool.query('DELETE FROM users WHERE id = ?', [userId]);
+    const [deleteResult] = await pool.query('DELETE FROM users WHERE id = ? RETURNING id', [userId]);
+    
+    if (!deleteResult || deleteResult.length === 0) {
+      return res.status(500).json({ error: 'Erro ao deletar usuário' });
+    }
 
     res.json({ message: 'Usuário deletado com sucesso' });
   } catch (err) {
@@ -296,7 +300,8 @@ app.put('/products/:id', authenticateToken, isAdmin, async (req, res) => {
       `UPDATE products 
        SET name = ?, description = ?, price = ?, category = ?, 
            stock = ?, image_url = ?, is_active = ?
-       WHERE id = ?`,
+       WHERE id = ?
+       RETURNING id`,
       [name, description, price, category, stock, image_url, is_active, id]
     );
 
@@ -324,7 +329,11 @@ app.delete('/products/:id', authenticateToken, isAdmin, async (req, res) => {
     }
 
     // Deletar o produto (CASCADE vai deletar cart_items e order_items automaticamente)
-    await pool.query('DELETE FROM products WHERE id = ?', [id]);
+    const [deleteResult] = await pool.query('DELETE FROM products WHERE id = ? RETURNING id', [id]);
+    
+    if (!deleteResult || deleteResult.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado para deletar' });
+    }
 
     res.json({ message: 'Produto deletado com sucesso' });
   } catch (err) {
@@ -350,7 +359,11 @@ app.patch('/products/:id/toggle-active', authenticateToken, isAdmin, async (req,
 
     const newStatus = !products[0].is_active;
     
-    await pool.query('UPDATE products SET is_active = ? WHERE id = ?', [newStatus, id]);
+    const [updateResult] = await pool.query('UPDATE products SET is_active = ? WHERE id = ? RETURNING id', [newStatus, id]);
+    
+    if (!updateResult || updateResult.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado para atualizar' });
+    }
 
     res.json({ 
       message: 'Status do produto atualizado',
@@ -448,10 +461,14 @@ app.patch('/admin/orders/:id/status', authenticateToken, isAdmin, async (req, re
       return res.status(400).json({ error: 'Status inválido' });
     }
 
-    await pool.query(
-      'UPDATE orders SET status = ? WHERE id = ?',
+    const [updateResult] = await pool.query(
+      'UPDATE orders SET status = ? WHERE id = ? RETURNING id',
       [status, orderId]
     );
+    
+    if (!updateResult || updateResult.length === 0) {
+      return res.status(404).json({ error: 'Pedido não encontrado' });
+    }
 
     res.json({ message: 'Status atualizado com sucesso' });
   } catch (err) {
