@@ -295,6 +295,18 @@ app.put('/products/:id', authenticateToken, isAdmin, async (req, res) => {
   const { id } = req.params;
   const { name, description, price, category, stock, image_url, is_active } = req.body;
 
+  console.log('📝 UPDATE PRODUTO - Dados recebidos:', {
+    id,
+    name,
+    description,
+    price,
+    category,
+    stock,
+    image_url,
+    is_active,
+    is_active_type: typeof is_active
+  });
+
   try {
     const [result] = await pool.query(
       `UPDATE products 
@@ -305,14 +317,20 @@ app.put('/products/:id', authenticateToken, isAdmin, async (req, res) => {
       [name, description, price, category, stock, image_url, is_active, id]
     );
 
+    console.log('✅ UPDATE PRODUTO - Resultado:', {
+      resultLength: result?.length,
+      result: result
+    });
+
     if (!result || result.length === 0) {
+      console.log('❌ UPDATE PRODUTO - Produto não encontrado');
       return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
     res.json({ message: 'Produto atualizado com sucesso' });
   } catch (err) {
-    console.error('Erro ao atualizar produto:', err);
-    res.status(500).json({ error: 'Erro ao atualizar produto' });
+    console.error('❌ Erro ao atualizar produto:', err);
+    res.status(500).json({ error: 'Erro ao atualizar produto', details: err.message });
   }
 });
 

@@ -135,6 +135,20 @@ const ProductsManagement = () => {
 
     const method = editingProduct ? 'PUT' : 'POST';
 
+    const payload = {
+      ...formData,
+      image_url: imageUrl,
+      price: parseFloat(formData.price),
+      stock: parseInt(formData.stock)
+    };
+
+    console.log('📤 Enviando dados do produto:', {
+      method,
+      url,
+      editingProduct: editingProduct?.id,
+      payload
+    });
+
     try {
       const response = await fetch(url, {
         method,
@@ -142,12 +156,12 @@ const ProductsManagement = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-          ...formData,
-          image_url: imageUrl,
-          price: parseFloat(formData.price),
-          stock: parseInt(formData.stock)
-        })
+        body: JSON.stringify(payload)
+      });
+
+      console.log('📡 Resposta do servidor:', {
+        status: response.status,
+        ok: response.ok
       });
 
       if (response.ok) {
@@ -156,10 +170,11 @@ const ProductsManagement = () => {
         alert(editingProduct ? 'Produto atualizado!' : 'Produto criado!');
       } else {
         const error = await response.json();
+        console.error('❌ Erro na resposta:', error);
         alert(error.error || 'Erro ao salvar produto');
       }
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('❌ Erro ao salvar produto:', error);
       alert('Erro ao salvar produto');
     }
   };
